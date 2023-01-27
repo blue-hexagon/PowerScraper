@@ -12,10 +12,25 @@ namespace PowerScraper.UnitTests.Core.Utility
         [TestCase(1_048_576+1, "1MiB")]
         [TestCase(1_024+1, "1KiB")]
         [TestCase(128, "128B")]
-        public void DetermineBinaryPrefix_WhenCalled_ReturnsTheGreatestWholeIntegerUnit(long bytes,
+        public void DetermineBinaryPrefix_WhenUsingBase2_ReturnsTheGreatestUnitUpToPetabytes(long bytes,
             string expectedResult)
         { 
-            var result = UnitConversion.DetermineBinaryPrefix(bytes);
+            UnitConversion.BaseUsed = UnitConversion.Bases.Base2;
+            var result = UnitConversion.DetermineUnitSuffix(bytes);
+            Assert.That(result, Is.EqualTo(expectedResult));
+        }
+        [Test]
+        [TestCase(1_000_000_000_000_000+1, "1PB")]
+        [TestCase(1_000_000_000_000+1, "1TB")]
+        [TestCase(1_000_000_000+1, "1GB")]
+        [TestCase(1_000_000+1, "1MB")]
+        [TestCase(1_000+1, "1KB")]
+        [TestCase(128, "128B")]
+        public void DetermineBinaryPrefix_WhenUsingBase10_ReturnsTheGreatestUnitUpToPetabytes(long bytes,
+            string expectedResult)
+        {
+            UnitConversion.BaseUsed = UnitConversion.Bases.Base10;
+            var result = UnitConversion.DetermineUnitSuffix(bytes);
             Assert.That(result, Is.EqualTo(expectedResult));
         }
     }

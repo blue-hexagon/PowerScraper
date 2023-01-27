@@ -7,10 +7,11 @@ namespace PowerScraper
     {
         public static void Main(string[] args)
         {
-            // ReSharper disable once ObjectCreationAsStatement
+            // Base2 is the default, but if you wish you can use base10.
+            UnitConversion.BaseUsed = UnitConversion.Bases.Base10;
+
             new Runner(args: args, formatting: OutputFormat.Json);
 
-            // ReSharper disable once ObjectCreationAsStatement
             // var collectors = new List<CollectorDescriptor>( { new CpuDescriptor() };
             // new Runner(collectorDescriptors: collectors, formatting: OutputFormat.Yaml);
         }

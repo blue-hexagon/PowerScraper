@@ -11,7 +11,7 @@ namespace PowerScraper.Core.Scraping.Module.Hardware.Harddrive
             {
                 if (drive.IsReady)
                 {
-                    Output.Add(drive.Name, UnitConversion.DetermineBinaryPrefix(drive.TotalSize));
+                    Output.Add(drive.Name, UnitConversion.DetermineUnitSuffix(drive.TotalSize));
                 }
             }
 

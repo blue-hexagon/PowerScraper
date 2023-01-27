@@ -11,7 +11,7 @@
             Base10
         }
 
-        public static string DetermineUnitSuffix(long bytes)
+        public static string ConvertBytesToGreatestUnit(long bytes)
         {
             if (BaseUsed == null)
                 throw new ArgumentNullException($"Set the base BaseUsed enum");

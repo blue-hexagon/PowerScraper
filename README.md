@@ -24,7 +24,6 @@
     <a href="https://github.com/blue-hexagon/PowerScraper/releases"><strong>Get Latest Version »</strong></a>
     <br />
     <br />
-
     <a href="https://github.com/blue-hexagon/PowerScraper/#demo">View Screenshots</a>
     ·
     <a href="https://github.com/blue-hexagon/PowerScraper/issues">Report Bug</a>

@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using PowerScraper.Core.Scraping.Module;
 
 namespace PowerScraper.Core;

@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using NUnit.Framework;
 using PowerScraper.Core.Configuration;
 using PowerScraper.Core.Scraping;
 

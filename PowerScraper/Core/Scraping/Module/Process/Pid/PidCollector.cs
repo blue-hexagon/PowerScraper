@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace PowerScraper.Core.Scraping.Module.Process.Pid
+﻿namespace PowerScraper.Core.Scraping.Module.Process.Pid
 {
     public sealed class PidCollector : AbstractCollector, ICollector
     {

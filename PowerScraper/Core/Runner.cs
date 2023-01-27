@@ -1,7 +1,4 @@
-﻿#nullable enable
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using PowerScraper.Core.Configuration;
 using PowerScraper.Core.Scraping.Module;
 using PowerScraper.Core.Scraping.Module.Hardware.Cpu;

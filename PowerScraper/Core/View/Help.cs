@@ -1,5 +1,4 @@
-﻿using System;
-using System.Text;
+﻿using System.Text;
 using PowerScraper.Core.Scraping;
 
 namespace PowerScraper.Core.View

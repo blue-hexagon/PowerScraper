@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace PowerScraper.Core.Scraping.Module
+﻿namespace PowerScraper.Core.Scraping.Module
 {
     public abstract class AbstractCollector
     {

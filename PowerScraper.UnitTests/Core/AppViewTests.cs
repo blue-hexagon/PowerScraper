@@ -1,6 +1,4 @@
-using System.Collections.Generic;
 using System.ComponentModel;
-using NUnit.Framework;
 using PowerScraper.Core;
 using PowerScraper.Core.Utility;
 

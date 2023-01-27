@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.ComponentModel;
 using PowerScraper.Core.Serializers;
 using PowerScraper.Core.Utility;

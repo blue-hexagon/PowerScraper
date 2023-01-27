@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using PowerScraper.Core.Scraping.Module;
-
-// ReSharper disable MemberCanBePrivate.Global
+﻿using PowerScraper.Core.Scraping.Module;
 
 namespace PowerScraper.Core.Scraping
 {

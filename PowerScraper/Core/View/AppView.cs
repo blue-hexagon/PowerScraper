@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using PowerScraper.Core.Scraping.Module;
+﻿using PowerScraper.Core.Scraping.Module;
 using PowerScraper.Core.Utility;
 
 namespace PowerScraper.Core.View

@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace PowerScraper.Core.Scraping.Module.Uncategorized.System

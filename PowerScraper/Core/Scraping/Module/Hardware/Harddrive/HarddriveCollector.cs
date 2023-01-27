@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using PowerScraper.Core.Utility;
+﻿using PowerScraper.Core.Utility;
 
 namespace PowerScraper.Core.Scraping.Module.Hardware.Harddrive
 {

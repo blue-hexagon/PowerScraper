@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace PowerScraper.Core.Scraping.Module.Software.InstalledSoftware
+﻿namespace PowerScraper.Core.Scraping.Module.Software.InstalledSoftware
 {
     public sealed class InstalledSoftwareCollector : AbstractCollector, ICollector
     {

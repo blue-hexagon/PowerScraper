@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using PowerScraper.Core.Scraping;
+﻿using PowerScraper.Core.Scraping;
 using PowerScraper.Core.Scraping.Module;
 using PowerScraper.Core.Utility;
 

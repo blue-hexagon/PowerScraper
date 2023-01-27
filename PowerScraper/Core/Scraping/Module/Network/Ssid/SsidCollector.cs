@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace PowerScraper.Core.Scraping.Module.Network.Ssid
+﻿namespace PowerScraper.Core.Scraping.Module.Network.Ssid
 {
     public sealed class SsidCollector : AbstractCollector, ICollector
     {

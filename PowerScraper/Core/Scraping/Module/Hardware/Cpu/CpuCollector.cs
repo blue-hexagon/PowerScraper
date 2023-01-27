@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace PowerScraper.Core.Scraping.Module.Hardware.Cpu
+﻿namespace PowerScraper.Core.Scraping.Module.Hardware.Cpu
 {
     public sealed class CpuCollector : AbstractCollector, ICollector
     {

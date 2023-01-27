@@ -1,5 +1,4 @@
 using System.Management.Automation;
-using NUnit.Framework;
 using PowerScraper.Core;
 
 namespace PowerScraper.UnitTests.Core

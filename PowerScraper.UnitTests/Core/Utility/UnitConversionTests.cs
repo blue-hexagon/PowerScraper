@@ -1,4 +1,3 @@
-using NUnit.Framework;
 using PowerScraper.Core.Utility;
 
 namespace PowerScraper.UnitTests.Core.Utility

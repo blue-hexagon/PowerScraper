@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Management.Automation;
 using System.Management.Automation.Runspaces;
 using Microsoft.Management.Infrastructure;
@@ -45,9 +44,9 @@ public static class TransientShell
         {
             foreach (var entry in member.Properties)
             {
-                if (entry.Value == null)
+                if (entry.Value.ToString() == null)
                     continue;
-                Output.Add(entry.Name, entry.Value.ToString());
+                Output.Add(entry.Name, entry.Value.ToString()!);
             }
         }
 

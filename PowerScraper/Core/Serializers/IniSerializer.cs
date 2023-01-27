@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace PowerScraper.Core.Serializers
+﻿namespace PowerScraper.Core.Serializers
 {
     public class IniSerializer: ISerializer
     {

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace PowerScraper.Core.Utility
+﻿namespace PowerScraper.Core.Utility
 {
     public static class UnitConversion
     {

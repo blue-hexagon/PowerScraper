@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace PowerScraper.Core.Scraping.Module.Hardware.Ram
+﻿namespace PowerScraper.Core.Scraping.Module.Hardware.Ram
 {
     public sealed class RamCollector : AbstractCollector, ICollector
     {

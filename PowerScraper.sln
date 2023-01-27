@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PowerScraper", "PowerScraper\PowerScraper.csproj", "{2548C811-4C29-4690-AD8C-E7F95C664213}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PowerScraper.UnitTests", "PowerScraper.UnitTests\PowerScraper.UnitTests.csproj", "{A5EC8157-0312-4682-88E6-79121B74B9EE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2548C811-4C29-4690-AD8C-E7F95C664213}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2548C811-4C29-4690-AD8C-E7F95C664213}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2548C811-4C29-4690-AD8C-E7F95C664213}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2548C811-4C29-4690-AD8C-E7F95C664213}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A5EC8157-0312-4682-88E6-79121B74B9EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5EC8157-0312-4682-88E6-79121B74B9EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5EC8157-0312-4682-88E6-79121B74B9EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5EC8157-0312-4682-88E6-79121B74B9EE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

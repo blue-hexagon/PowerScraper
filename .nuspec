@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <metadata>
+        <!-- Identifier that must be unique within the hosting gallery -->
+        <id>PowerScraper.Utility.UsefulStuff</id>
+
+        <!-- Package version number that is used when resolving dependencies -->
+        <version>0.0.1</version>
+
+        <!-- Authors contain text that appears directly on the gallery -->
+        <authors>Blue-Hexagon</authors>
+
+        <!-- 
+            Owners are typically nuget.org identities that allow gallery
+            users to easily find other packages by the same owners.  
+        -->
+        <owners>Blue-Hexagon</owners>
+
+        <!-- Project URL provides a link for the gallery -->
+        <projectUrl>http://github.com/blue-hexagon/PowerScraper</projectUrl>
+
+        <!-- License information is displayed on the gallery -->
+        <license type="expression">MIT</license>
+
+
+        <!-- Icon is used in Visual Studio's package manager UI -->
+        <!--        <icon></icon>-->
+
+        <!-- 
+            If true, this value prompts the user to accept the license when
+            installing the package. 
+        -->
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+
+        <!-- Any details about this particular release -->
+        <releaseNotes>0.0.1-pre-release</releaseNotes>
+
+        <!-- 
+            The description can be used in package manager UI. Note that the
+            nuget.org gallery uses information you add in the portal. 
+        -->
+        <description>An advanced, lightweight system information tool for Windows devices 🔍</description>
+
+        <!-- Copyright information -->
+        <copyright>Copyright ©2023 Blue-Hexagon</copyright>
+
+        <!-- Tags appear in the gallery and can be used for tag searches -->
+        <tags>system information-gathering-tool</tags>
+
+        <!-- Dependencies are automatically installed when the package is installed -->
+        <dependencies>
+            <dependency id="Newtonsoft.Json" version="9.0"/>
+            <dependency id="Microsoft.NETFramework.ReferenceAssemblies.net48" version="1.0.3"/>
+            <dependency id="Microsoft.PowerShell.5.1.ReferenceAssemblies" version="1.0.0"/>
+            <dependency id="Microsoft.PowerShell.SDK" version="7.3.1"/>
+            <dependency id="Newtonsoft.Json" version="13.0.2"/>
+            <dependency id="Samboy063.Tomlet" version="5.1.2"/>
+            <dependency id="System.Management.Automation" version="7.3.1"/>
+            <dependency id="YamlDotNet" version="12.3.1"/>
+        </dependencies>
+    </metadata>
+
+    <!-- A readme.txt to display when the package is installed -->
+    <!--    <files>-->
+    <!--        <file src="readme.txt" target="" />-->
+    <!--        <file src="icon.png" target="" />-->
+    <!--    </files>-->
+</package>

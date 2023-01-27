@@ -1,0 +1,8 @@
+# DevNotes
+## Count LOC in Rider
+- Ctrl + Shift + F (to open global search)
+- Use regex mode (check "regex" checkbox)
+- In the searchbox, enter only a caret "^" (without the quotes)
+- You may want to limit the search to a specific directory, via the "directory" tab
+- Hit the "Open in Find Window" button on the bottom-right
+- If it asks whether you want to continue, press "Continue"

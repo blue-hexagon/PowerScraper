@@ -3,7 +3,7 @@
     /** Set the BaseUsed to a Bases enum before executing the program if you wish to use Base10 units. */
     public static class UnitConversion
     {
-        public static Enum? BaseUsed { get; set; } = Bases.Base2;
+        public static Enum? BaseUsed { get; set; } = null;
 
         public enum Bases
         {

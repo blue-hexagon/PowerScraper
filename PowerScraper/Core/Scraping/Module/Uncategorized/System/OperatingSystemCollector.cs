@@ -4,7 +4,7 @@ namespace PowerScraper.Core.Scraping.Module.Uncategorized.System
 {
     public sealed class OperatingSystemCollector : AbstractCollector, ICollector
     {
-        public Dictionary<string, string> PerformScraping()
+        public Dictionary<string, string> ScrapeWindows()
         {
             try
             {
@@ -24,6 +24,21 @@ namespace PowerScraper.Core.Scraping.Module.Uncategorized.System
             }
 
             return Output;
+        }
+
+        public Dictionary<string, string> ScrapeLinux()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Dictionary<string, string> ScrapeOsX()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Dictionary<string, string> ScrapeFreeBsd()
+        {
+            throw new NotImplementedException();
         }
     }
 }

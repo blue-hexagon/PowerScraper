@@ -1,6 +1,6 @@
 ﻿namespace PowerScraper.Core.Utility
 {
-    public enum OutputFormat
+    public enum SerializationFormat
     {
         Json = 1,
         Yaml = 2,

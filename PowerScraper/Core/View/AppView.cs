@@ -5,7 +5,7 @@ namespace PowerScraper.Core.View
 {
     public static class AppView
     {
-        public static void Display(OutputFormat formatting, List<CollectorDescriptor> collectorDescriptors)
+        public static void Display(SerializationFormat formatting, List<CollectorDescriptor> collectorDescriptors)
         {
             var scrapedContent = ScrapingBuilder.PerformScraping(collectorDescriptors);
             var serializedOutput = Serializer.SerializeScrapedOutput(formatting, scrapedContent);

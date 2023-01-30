@@ -5,7 +5,7 @@ namespace PowerScraper.Core.Scraping.Module.Network.Interface
 {
     public sealed class InterfaceCollector : AbstractCollector, ICollector
     {
-        public Dictionary<string, string> PerformScraping()
+        public Dictionary<string, string> ScrapeWindows()
         {
             try
             {
@@ -17,7 +17,7 @@ namespace PowerScraper.Core.Scraping.Module.Network.Interface
                 NetworkInterface[] adapters = NetworkInterface.GetAllNetworkInterfaces();
                 foreach (NetworkInterface adapter in adapters)
                 {
-                    if (adapter.OperationalStatus == OperationalStatus.Up ||  adapter.OperationalStatus == OperationalStatus.Down)
+                    if (adapter.OperationalStatus is OperationalStatus.Up or OperationalStatus.Down)
                     {
                         IPInterfaceProperties properties = adapter.GetIPProperties();
                         Console.WriteLine(adapter.Description);
@@ -41,6 +41,21 @@ namespace PowerScraper.Core.Scraping.Module.Network.Interface
             }
 
             return Output;
+        }
+
+        public Dictionary<string, string> ScrapeLinux()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Dictionary<string, string> ScrapeOsX()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Dictionary<string, string> ScrapeFreeBsd()
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -6,17 +6,17 @@ namespace PowerScraper.Core;
 
 public static class Serializer
 {
-    public static string SerializeScrapedOutput(OutputFormat formatting,
+    public static string SerializeScrapedOutput(SerializationFormat formatting,
         Dictionary<string, Dictionary<string, string>> scrapedContent)
     {
         var serializedOutput = formatting switch
         {
-            OutputFormat.Csv => new CsvSerializer().Serialize(scrapedContent),
-            OutputFormat.Ini => new IniSerializer().Serialize(scrapedContent),
-            OutputFormat.Xml => new XmlSerializer().Serialize(scrapedContent),
-            OutputFormat.Json => new JsonSerializer().Serialize(scrapedContent),
-            OutputFormat.Yaml => new YamlSerializer().Serialize(scrapedContent),
-            OutputFormat.Toml => new TomlSerializer().Serialize(scrapedContent),
+            SerializationFormat.Csv => new CsvSerializer().Serialize(scrapedContent),
+            SerializationFormat.Ini => new IniSerializer().Serialize(scrapedContent),
+            SerializationFormat.Xml => new XmlSerializer().Serialize(scrapedContent),
+            SerializationFormat.Json => new JsonSerializer().Serialize(scrapedContent),
+            SerializationFormat.Yaml => new YamlSerializer().Serialize(scrapedContent),
+            SerializationFormat.Toml => new TomlSerializer().Serialize(scrapedContent),
             _ => throw new InvalidEnumArgumentException()
         };
 

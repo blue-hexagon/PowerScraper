@@ -6,12 +6,9 @@ namespace PowerScraper.Core
 {
     public static class CommandLineParser
     {
-        /** Parses the command line arguments and returns the corresponding collectors, or null. */
-        public static List<CollectorDescriptor> ParseCommandLineArguments(string[] cliArguments)
+        /** Parses the command line arguments and returns the corresponding collectors; if a category is passed, each collector in then category is retrieved */
+        public static List<CollectorDescriptor> ParseCommandLineArguments(IEnumerable<string> cliArguments)
         {
-            if (cliArguments.Length == 0)
-                return null;
-
             var collectors = new List<CollectorDescriptor>();
             foreach (var arg in cliArguments)
             {

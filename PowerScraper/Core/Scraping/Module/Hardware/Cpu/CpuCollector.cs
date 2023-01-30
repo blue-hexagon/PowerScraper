@@ -2,7 +2,7 @@
 {
     public sealed class CpuCollector : AbstractCollector, ICollector
     {
-        public Dictionary<string, string> PerformScraping()
+        public Dictionary<string, string> ScrapeWindows()
         {
             var psObjects = TransientShell.InvokeRawScript(@"
                 Get-WmiObject -Class Win32_Processor | Select-Object DeviceID,SocketDesignation, LoadPercentage,
@@ -14,6 +14,21 @@
             Output = TransientShell.ParsePsObjects(psObjects);
 
             return Output;
+        }
+
+        public Dictionary<string, string> ScrapeLinux()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Dictionary<string, string> ScrapeOsX()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Dictionary<string, string> ScrapeFreeBsd()
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -10,7 +10,7 @@ namespace PowerScraper.UnitTests.Core
         [Test]
         public void SerializeScrapedOutput_GivenInvalidFormattingEnum_ThrowsException()
         {
-            var invalidEnum = (OutputFormat)9999;
+            var invalidEnum = (SerializationFormat)9999;
             var dummyDict = new Dictionary<string, Dictionary<string, string>>();
             Assert.Throws<InvalidEnumArgumentException>(() =>
                 Serializer.SerializeScrapedOutput(invalidEnum, dummyDict));

@@ -17,7 +17,18 @@
     <img src=".readme/logo.png" alt="Logo" height="120">
   </a>
 
-<h3 align="center">PowerScraper (Work in Progress)</h3>
+<p align="center>
+
+
+![Windows][windows-badge]
+![Linux][linux-badge]
+![OSX][osx-badge]
+![FreeBSD][freebsd-badge]
+
+
+</p>
+<h2>Work in Progress</h2>
+<h3 align="center">PowerScraper</h3>
   <p align="center">
     An advanced, lightweight system information tool for Windows devices 
     <br />
@@ -36,16 +47,12 @@
 
 ## About The Project
 
-**This is a work in progress**
+This project is the a reimplementation of ![WinScraper](https://github.com/blue-hexagon/WinScraper) that's build with C#11 and .NET Core 7.
 
-This project is the sucessor / a reimplementation of a project
-called ![WinScraper](https://github.com/blue-hexagon/WinScraper).
-This implementation is build with C# and .NET Framework v.4.8 instead of Python.
+It comes in two packages: a CLI tool which is a downloadable executable, and a library which is available as a NuGet package.
 
-It's both an CLI tool (downloadable executeable) and a library (available as a NuGet package).
-
-It's used for collecting information about devices running Windows OS which is then serialized into a wide array of
-dataformats such as YAML, JSON, XML, CSV, TOML and possibly INI and CSV.
+It collects information about devices running on Windows, Linux, OsX, and FreeBSD which is then serialized into a wide array of
+data formats such as YAML, JSON, XML, CSV, TOML, INI and CSV.
 
 ## Demo & Screenshots
 
@@ -57,14 +64,6 @@ Or run it with the `--help` option for more detailed help - example:
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Getting Started
-
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
-
-### Prerequisites
-
-None.
-
 ### Installation
 
 #### Install as Application
@@ -81,7 +80,7 @@ None.
 ## Contributing
 
 The project is pretty easy to extend and you won't need to concern yourself with any of the codebase besides
-all the scraping logic that is contained within `Core.Scraping.Modules.<ModuleName>`, where you find the mo
+all the scraping logic that is contained within `Core.Scraping.Modules.<ModuleName>`, where you find the modules that do the actual scraping.
 
 If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also
 simply open an issue. Also, don't forget to give the project a star ⭐!
@@ -104,7 +103,7 @@ the [tags on this repository](https://github.com/blue-hexagon/powerscraper/tags)
 
 ## Authors
 
-- **Manjana** - *Initial work* - [manjana](https://github.com/blue-hexagon)
+- **Blue-Hexagon** - *Initial work* - [Blue-Hexagon](https://github.com/blue-hexagon)
 
 See also the list of [contributors](https://github.com/blue-hexagon/powerscraper/contributors) who participated in this
 project.
@@ -113,7 +112,7 @@ project.
 
 ## Contact
 
-Reach me on Discord @ manjana#3559
+Contact me on Discord at `manjana#3559` for any matter related to this project.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -151,3 +150,10 @@ This project is distributed under the MIT License - see [LICENSE.md](LICENSE) fo
 [workflow-url]: https://github.com/blue-hexagon/PowerScraper/actions/workflows/dotnet.yml/badge.svg
 
 [product-screenshot]: .readme/logo.png
+
+
+[windows-badge]: https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white
+[linux-badge]: https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black
+[osx-badge]: https://img.shields.io/badge/mac%20os-000000?style=for-the-badge&logo=apple&logoColor=white
+[freebsd-badge]: https://img.shields.io/badge/freebsd-AB2B28?style=for-the-badge&logo=freebsd&logoColor=white
+

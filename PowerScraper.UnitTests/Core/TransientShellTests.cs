@@ -11,7 +11,7 @@ namespace PowerScraper.UnitTests.Core
         public void InvokeRawCommand_GivenCmdletIsNotContainedInRunspace_ReturnsEmptyCollection()
         {
             TransientShell.InitializeRunspace();
-            var result = TransientShell.InvokeRawScript("Clear-History");
+            var result = TransientShell.InvokeRawScript("Get-History");
             TransientShell.CloseRunspace();
 
             Assert.IsEmpty(result);

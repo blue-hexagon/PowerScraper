@@ -10,9 +10,9 @@ namespace PowerScraper.UnitTests.Core
         {
             var args = Array.Empty<string>();
 
-            var result = CommandLineParser.ParseCommandLineArguments(args);
+            var result = ArgParser.ParseCommandLineArguments(args);
 
-            Assert.Null(result);
+            Assert.That(result, Is.Null);
         }
     }
 }

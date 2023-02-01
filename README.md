@@ -17,20 +17,14 @@
     <img src=".readme/logo.png" alt="Logo" height="120">
   </a>
 
-<p align="center>
-
-
 ![Windows][windows-badge]
 ![Linux][linux-badge]
 ![OSX][osx-badge]
 ![FreeBSD][freebsd-badge]
-
-
-</p>
 <h2>Work in Progress</h2>
 <h3 align="center">PowerScraper</h3>
   <p align="center">
-    An advanced, lightweight system information tool for Windows devices 
+    An advanced, lightweight system information tool 
     <br />
     <a href="https://github.com/blue-hexagon/PowerScraper/releases"><strong>Get Latest Version »</strong></a>
     <br />
@@ -47,12 +41,25 @@
 
 ## About The Project
 
-This project is the a reimplementation of ![WinScraper](https://github.com/blue-hexagon/WinScraper) that's build with C#11 and .NET Core 7.
+This project is the a reimplementation of a previous project I did in Python called [WinScraper](https://github.com/blue-hexagon/WinScraper); this version is build with C#11 and .NET Core 7.
 
 It comes in two packages: a CLI tool which is a downloadable executable, and a library which is available as a NuGet package.
 
 It collects information about devices running on Windows, Linux, OsX, and FreeBSD which is then serialized into a wide array of
 data formats such as YAML, JSON, XML, CSV, TOML, INI and CSV.
+
+### Development Status
+| Collector Name                             | Category <img width=500 height=1/>  | ![w-top] | ![l-top] | ![m-top] | ![b-top] |
+|:-------------------------------------------|:------------------------------------|----------|----------|----------|----------|
+| CPU                                        | All.Hardware                        | ![w]     | ![l2]    | ![m2]    | ![b2]    |
+| RAM                                        | All.Hardware                        | ![w2]    | ![l2]    | ![m2]    | ![b2]    |
+| Interface                                  | All.Network                         | ![w2]    | ![l2]    | ![m2]    | ![b2]    |
+| SSID                                       | All.Network                         | ![w2]    | ![l2]    | ![m2]    | ![b2]    |
+| PID                                        | All.Process                         | ![w2]    | ![l2]    | ![m2]    | ![b2]    |
+| Installed Software                         | All.Software                        | ![w2]    | ![l2]    | ![m2]    | ![b2]    |
+| Startup Software                           | All.Software                        | ![w2]    | ![l2]    | ![m2]    | ![b2]    |
+| Computer                                   | All.System                          | ![w2]    | ![l2]    | ![m2]    | ![b2]    |
+| Operating System                           | All.System                          | ![w2]    | ![l2]    | ![m2]    | ![b2]    |
 
 ## Demo & Screenshots
 
@@ -80,7 +87,7 @@ Or run it with the `--help` option for more detailed help - example:
 ## Contributing
 
 The project is pretty easy to extend and you won't need to concern yourself with any of the codebase besides
-all the scraping logic that is contained within `Core.Scraping.Modules.<ModuleName>`, where you find the modules that do the actual scraping.
+all the scraping logic that is contained within `Core.Scraping.Modules.<ModuleName>`, where you find the modules and collectors that do the handle the scraping.
 
 If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also
 simply open an issue. Also, don't forget to give the project a star ⭐!
@@ -157,3 +164,17 @@ This project is distributed under the MIT License - see [LICENSE.md](LICENSE) fo
 [osx-badge]: https://img.shields.io/badge/mac%20os-000000?style=for-the-badge&logo=apple&logoColor=white
 [freebsd-badge]: https://img.shields.io/badge/freebsd-AB2B28?style=for-the-badge&logo=freebsd&logoColor=white
 
+[w-top]: https://raw.githubusercontent.com/blue-hexagon/PowerScraper/master/.readme/icon/windows-enabled-icon.png "↓ Windows Feature Status ↓"
+[l-top]: https://raw.githubusercontent.com/blue-hexagon/PowerScraper/master/.readme/icon/linux-enabled-icon.png "↓ Linux Feature Status ↓"
+[m-top]: https://raw.githubusercontent.com/blue-hexagon/PowerScraper/master/.readme/icon/osx-enabled-icon.png "↓ macOS (OSX) Feature Status ↓"
+[b-top]: https://raw.githubusercontent.com/blue-hexagon/PowerScraper/master/.readme/icon/bsd-enabled-icon.png "↓ FreeBSD Feature Status ↓"
+
+[w]: https://raw.githubusercontent.com/blue-hexagon/PowerScraper/master/.readme/icon/windows-enabled-icon.png "Windows collector is implemented ☺"
+[l]: https://raw.githubusercontent.com/blue-hexagon/PowerScraper/master/.readme/icon/linux-enabled-icon.png "Linux collector is implemented ☺"
+[m]: https://raw.githubusercontent.com/blue-hexagon/PowerScraper/master/.readme/icon/osx-enabled-icon.png "macOS (OSX) collector is implemented ☺"
+[b]: https://raw.githubusercontent.com/blue-hexagon/PowerScraper/master/.readme/icon/bsd-enabled-icon.png "FreeBSD collector is implemented ☺"
+
+[w2]: https://raw.githubusercontent.com/blue-hexagon/PowerScraper/master/.readme/icon//windows-disabled-icon.png "Windows collector is not implemented"
+[l2]: https://raw.githubusercontent.com/blue-hexagon/PowerScraper/master/.readme/icon/linux-disabled-icon.png "Linux collector is not implemeneted"
+[m2]: https://raw.githubusercontent.com/blue-hexagon/PowerScraper/master/.readme/icon/osx-disabled-icon.png "macOS (OSX) collector is not implemented"
+[b2]: https://raw.githubusercontent.com/blue-hexagon/PowerScraper/master/.readme/icon/bsd-disabled-icon.png "FreeBSD collector is not implemented"

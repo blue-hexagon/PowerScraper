@@ -1,12 +1,14 @@
-﻿namespace PowerScraper.Core.Scraping.Module.Process
+﻿using PowerScraper.Core.Scraping.DataStructure;
+
+namespace PowerScraper.Core.Scraping.Module.Process
 {
-    public class ProcessDescriptor : CategoryDescriptor
+    public class ProcessDescriptor : AbstractDescriptor
     {
         public ProcessDescriptor() : base(
             name: "Process",
             cmdArg: "--process",
-            parameter: "process",
-            description: "All process modules"
+            description: "All process modules",
+            scraper:null
         )
         {
         }

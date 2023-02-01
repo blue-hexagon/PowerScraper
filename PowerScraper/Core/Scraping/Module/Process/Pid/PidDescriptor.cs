@@ -1,14 +1,14 @@
-﻿namespace PowerScraper.Core.Scraping.Module.Process.Pid
+﻿using PowerScraper.Core.Scraping.DataStructure;
+
+namespace PowerScraper.Core.Scraping.Module.Process.Pid
 {
-    public sealed class PidDescriptor: CollectorDescriptor
+    public sealed class PidDescriptor: AbstractDescriptor
     {
         public PidDescriptor() : base(
             name: "Process ID Collector",
             description: "Collects all process names and IDs",
-            categoryDescriptor: new ProcessDescriptor(),
             cmdArg: "--pid",
-            parameter: "pid",
-            collector: new PidCollector()
+            scraper: new PidScraper()
             )
         {
             

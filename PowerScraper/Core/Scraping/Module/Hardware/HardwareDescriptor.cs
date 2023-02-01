@@ -1,12 +1,15 @@
-﻿namespace PowerScraper.Core.Scraping.Module.Hardware
+﻿using PowerScraper.Core.Scraping.DataStructure;
+
+namespace PowerScraper.Core.Scraping.Module.Hardware
 {
-    public class HardwareDescriptor : CategoryDescriptor
+    public class HardwareDescriptor : AbstractDescriptor
     {
         public HardwareDescriptor() : base(
             name: "Hardware",
             cmdArg: "--hardware",
-            parameter: "hardware",
-            description: "All hardware modules")
+            description: "All hardware modules",
+            scraper:null
+            )
         {
         }
     }

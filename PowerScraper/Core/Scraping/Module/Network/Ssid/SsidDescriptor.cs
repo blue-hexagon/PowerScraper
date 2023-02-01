@@ -1,14 +1,14 @@
-﻿namespace PowerScraper.Core.Scraping.Module.Network.Ssid
+﻿using PowerScraper.Core.Scraping.DataStructure;
+
+namespace PowerScraper.Core.Scraping.Module.Network.Ssid
 {
-    public sealed class SsidDescriptor :CollectorDescriptor
+    public sealed class SsidDescriptor :AbstractDescriptor
     {
         public SsidDescriptor() : base(
             name: "SSID Collector",
             description: "Collects saved SSID and their associated passwords if such exists",
-            categoryDescriptor: new NetworkDescriptor(),
             cmdArg: "--ssid",
-            parameter: "ssid",
-            collector: new SsidCollector()
+            scraper: new SsidScraper()
             )
         {
             

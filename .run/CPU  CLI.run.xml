@@ -1,7 +1,7 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Harddrive CLI" type="RunExe" factoryName=".NET Executable">
+  <configuration default="false" name="CPU  CLI" type="RunExe" factoryName=".NET Executable">
     <option name="EXE_PATH" value="$PROJECT_DIR$/PowerScraper/bin/Debug/net7.0/PowerScraper.exe" />
-    <option name="PROGRAM_PARAMETERS" value="--harddrive" />
+    <option name="PROGRAM_PARAMETERS" value="--cpu" />
     <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/PowerScraper/bin/Debug/net7.0" />
     <option name="PASS_PARENT_ENVS" value="1" />
     <option name="USE_EXTERNAL_CONSOLE" value="0" />

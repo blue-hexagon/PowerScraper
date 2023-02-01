@@ -2,10 +2,10 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
         <!-- Identifier that must be unique within the hosting gallery -->
-        <id>PowerScraper.Utility.UsefulStuff</id>
+        <id>PowerScraper</id>
 
         <!-- Package version number that is used when resolving dependencies -->
-        <version>0.0.1</version>
+        <version>0.0.1-pre-release</version>
 
         <!-- Authors contain text that appears directly on the gallery -->
         <authors>Blue-Hexagon</authors>
@@ -39,23 +39,24 @@
             The description can be used in package manager UI. Note that the
             nuget.org gallery uses information you add in the portal. 
         -->
-        <description>An advanced, lightweight system information tool for Windows devices 🔍</description>
+        <description>An advanced, lightweight system information tool for Windows, Linux, OsX and FreeBSD devices 🔍
+        </description>
 
         <!-- Copyright information -->
         <copyright>Copyright ©2023 Blue-Hexagon</copyright>
 
         <!-- Tags appear in the gallery and can be used for tag searches -->
-        <tags>system information-gathering-tool</tags>
+        <tags>system information-gathering-tool specs</tags>
 
         <!-- Dependencies are automatically installed when the package is installed -->
+        <!--            <dependency id="Microsoft.NETFramework.ReferenceAssemblies.net48" version="1.0.3"/>-->
         <dependencies>
-            <dependency id="Newtonsoft.Json" version="9.0"/>
-            <dependency id="Microsoft.NETFramework.ReferenceAssemblies.net48" version="1.0.3"/>
+            <dependency id="Microsoft.Management.Infrastructure.CimCmdlets" version="7.3.2"/>
             <dependency id="Microsoft.PowerShell.5.1.ReferenceAssemblies" version="1.0.0"/>
-            <dependency id="Microsoft.PowerShell.SDK" version="7.3.1"/>
+            <dependency id="Microsoft.PowerShell.SDK" version="7.3.2"/>
             <dependency id="Newtonsoft.Json" version="13.0.2"/>
             <dependency id="Samboy063.Tomlet" version="5.1.2"/>
-            <dependency id="System.Management.Automation" version="7.3.1"/>
+            <dependency id="System.Management.Automation" version="7.3.2"/>
             <dependency id="YamlDotNet" version="12.3.1"/>
         </dependencies>
     </metadata>

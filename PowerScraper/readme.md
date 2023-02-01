@@ -1,0 +1,2 @@
+Microsoft.Management.Infrastructure.CimCmdlets
+YamlDotNet

@@ -1,13 +1,13 @@
-﻿namespace PowerScraper.Core.Scraping.Module.Software.StartupSoftware  {
-    public sealed class StartupSoftDescriptor : CollectorDescriptor
+﻿using PowerScraper.Core.Scraping.DataStructure;
+
+namespace PowerScraper.Core.Scraping.Module.Software.StartupSoftware  {
+    public sealed class StartupSoftDescriptor : AbstractDescriptor
     {
         public StartupSoftDescriptor() : base(
             name: "Startup Software Collector",
             description: "Scan the windows registry for software which is executed at startup",
-            categoryDescriptor: new SoftwareDescriptor(),
             cmdArg: "--startup-software",
-            parameter: "startup-software",
-            collector: new StartupSoftwareCollector()
+            scraper: new StartupSoftwareScraper()
             )
         {
             

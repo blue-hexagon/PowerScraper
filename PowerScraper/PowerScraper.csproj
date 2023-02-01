@@ -5,16 +5,32 @@
         <TargetFramework>net7.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <Version>0.0.1-pre-release</Version>
+        <Title>PowerScraper</Title>
+        <Authors>Blue-Hexagon</Authors>
+        <Description>An advanced, cross platform, lightweight system information tool for Windows, Linux, OsX and FreeBSD devices</Description>
+        <Copyright>Copyright ©2023 Blue-Hexagon</Copyright>
+        <PackageProjectUrl>https://github.com/blue-hexagon/PowerScraper</PackageProjectUrl>
+        <PackageLicenseUrl>https://github.com/blue-hexagon/PowerScraper/blob/master/LICENSE.md</PackageLicenseUrl>
+        <RepositoryUrl>https://github.com/blue-hexagon/PowerScraper</RepositoryUrl>
+        <PackageTags>system information-gathering-tool specs</PackageTags>
+        <PackageReleaseNotes>Pre-release. In development.</PackageReleaseNotes>
+        <ApplicationIcon>icons8-lightning-bolt-50.ico</ApplicationIcon>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Microsoft.Management.Infrastructure.CimCmdlets" Version="7.3.2" />
-      <PackageReference Include="Microsoft.PowerShell.5.1.ReferenceAssemblies" Version="1.0.0" />
       <PackageReference Include="Microsoft.PowerShell.SDK" Version="7.3.2" />
       <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
+      <PackageReference Include="Pastel" Version="4.1.0" />
+      <PackageReference Include="PowerShellStandard.Library" Version="5.1.1" />
       <PackageReference Include="Samboy063.Tomlet" Version="5.1.2" />
       <PackageReference Include="System.Management.Automation" Version="7.3.2" />
-      <PackageReference Include="YamlDotNet" Version="12.3.1" />
+      <PackageReference Include="YamlDotNet" Version="13.1.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Core\Configuration" />
     </ItemGroup>
 
 </Project>

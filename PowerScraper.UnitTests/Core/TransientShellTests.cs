@@ -21,7 +21,7 @@ namespace PowerScraper.UnitTests.Core
         public void InvokeRawCommand_CommandIsNull_ThrowsException()
         {
             TransientShell.InitializeRunspace();
-            Assert.Throws<PSArgumentNullException>(() => TransientShell.InvokeRawScript(null));
+            Assert.Throws<PSArgumentNullException>(() => TransientShell.InvokeRawScript(null!));
         }
 
         [Test]

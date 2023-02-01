@@ -49,7 +49,7 @@ It collects information about devices running on Windows, Linux, OsX, and FreeBS
 data formats such as YAML, JSON, XML, CSV, TOML, INI and CSV.
 
 ### Development Status
-| Collector Name                             | Category <img width=500 height=1/>  | ![w-top] | ![l-top] | ![m-top] | ![b-top] |
+| Scraper Name                             | Category <img width=500 height=1/>  | ![w-top] | ![l-top] | ![m-top] | ![b-top] |
 |:-------------------------------------------|:------------------------------------|----------|----------|----------|----------|
 | CPU                                        | All.Hardware                        | ![w]     | ![l2]    | ![m2]    | ![b2]    |
 | RAM                                        | All.Hardware                        | ![w2]    | ![l2]    | ![m2]    | ![b2]    |
@@ -87,15 +87,24 @@ Or run it with the `--help` option for more detailed help - example:
 ## Contributing
 
 The project is pretty easy to extend and you won't need to concern yourself with any of the codebase besides
-all the scraping logic that is contained within `Core.Scraping.Modules.<ModuleName>`, where you find the modules and collectors that do the handle the scraping.
+all the scraping logic that is contained within `Core.Scraping.Modules.<ModuleName>`, where you find the modules and scrapers; a module is equivalent to a category and modules can be nested.
+
+Modules can contain other modules or they can contain scrapers.
+The whole datastructure for the modules and scrapers are set up as a generalized tree where the leafs are scrapers and any other node which is not a leaf is a module.
+The only rule is that you cannot setup an empty module without at least one child that is a scraper (hence a category cannot be a leaf).
+
+To add new modules or scrapers, the code should be self-explanatory enough I hope.
+
+Since it was pretty easy to implement, I've added support for a few other operating systems in case someone would find it fun to implement scrapers for these.
+I might do some for Linux once the Windows scrapers are completed.
 
 If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also
 simply open an issue. Also, don't forget to give the project a star ⭐!
 
 1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+2. Create your Feature Branch (`git checkout -b feature/YourAwesomeNewScraper`)
 3. Commit your Changes (`git commit -m '...'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
+4. Push to the Branch (`git push origin feature/YourAwesomeNewScraper`)
 5. Open a Pull Request
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -169,12 +178,12 @@ This project is distributed under the MIT License - see [LICENSE.md](LICENSE) fo
 [m-top]: https://raw.githubusercontent.com/blue-hexagon/PowerScraper/master/.readme/icon/osx-enabled-icon.png "↓ macOS (OSX) Feature Status ↓"
 [b-top]: https://raw.githubusercontent.com/blue-hexagon/PowerScraper/master/.readme/icon/bsd-enabled-icon.png "↓ FreeBSD Feature Status ↓"
 
-[w]: https://raw.githubusercontent.com/blue-hexagon/PowerScraper/master/.readme/icon/windows-enabled-icon.png "Windows collector is implemented ☺"
-[l]: https://raw.githubusercontent.com/blue-hexagon/PowerScraper/master/.readme/icon/linux-enabled-icon.png "Linux collector is implemented ☺"
-[m]: https://raw.githubusercontent.com/blue-hexagon/PowerScraper/master/.readme/icon/osx-enabled-icon.png "macOS (OSX) collector is implemented ☺"
-[b]: https://raw.githubusercontent.com/blue-hexagon/PowerScraper/master/.readme/icon/bsd-enabled-icon.png "FreeBSD collector is implemented ☺"
+[w]: https://raw.githubusercontent.com/blue-hexagon/PowerScraper/master/.readme/icon/windows-enabled-icon.png "Windows scraper is implemented ☺"
+[l]: https://raw.githubusercontent.com/blue-hexagon/PowerScraper/master/.readme/icon/linux-enabled-icon.png "Linux scraper is implemented ☺"
+[m]: https://raw.githubusercontent.com/blue-hexagon/PowerScraper/master/.readme/icon/osx-enabled-icon.png "macOS (OSX) scraper is implemented ☺"
+[b]: https://raw.githubusercontent.com/blue-hexagon/PowerScraper/master/.readme/icon/bsd-enabled-icon.png "FreeBSD scraper is implemented ☺"
 
-[w2]: https://raw.githubusercontent.com/blue-hexagon/PowerScraper/master/.readme/icon//windows-disabled-icon.png "Windows collector is not implemented"
-[l2]: https://raw.githubusercontent.com/blue-hexagon/PowerScraper/master/.readme/icon/linux-disabled-icon.png "Linux collector is not implemeneted"
-[m2]: https://raw.githubusercontent.com/blue-hexagon/PowerScraper/master/.readme/icon/osx-disabled-icon.png "macOS (OSX) collector is not implemented"
-[b2]: https://raw.githubusercontent.com/blue-hexagon/PowerScraper/master/.readme/icon/bsd-disabled-icon.png "FreeBSD collector is not implemented"
+[w2]: https://raw.githubusercontent.com/blue-hexagon/PowerScraper/master/.readme/icon//windows-disabled-icon.png "Windows scraper is not implemented"
+[l2]: https://raw.githubusercontent.com/blue-hexagon/PowerScraper/master/.readme/icon/linux-disabled-icon.png "Linux scraper is not implemeneted"
+[m2]: https://raw.githubusercontent.com/blue-hexagon/PowerScraper/master/.readme/icon/osx-disabled-icon.png "macOS (OSX) scraper is not implemented"
+[b2]: https://raw.githubusercontent.com/blue-hexagon/PowerScraper/master/.readme/icon/bsd-disabled-icon.png "FreeBSD scraper is not implemented"

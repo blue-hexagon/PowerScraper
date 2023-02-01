@@ -1,9 +1,10 @@
-﻿namespace PowerScraper.Core.Utility
+﻿// ReSharper disable InconsistentNaming
+namespace PowerScraper.Core.Utility
 {
     /** Set the BaseUsed to a Bases enum before executing the program if you wish to use Base10 units. */
     public static class UnitConversion
     {
-        public static Enum? BaseUsed { get; set; } = null;
+        public static Enum? BaseUsed { get; set; }
 
         public enum Bases
         {

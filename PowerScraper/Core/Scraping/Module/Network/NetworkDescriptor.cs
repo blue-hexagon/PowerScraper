@@ -1,12 +1,14 @@
-﻿namespace PowerScraper.Core.Scraping.Module.Network
+﻿using PowerScraper.Core.Scraping.DataStructure;
+
+namespace PowerScraper.Core.Scraping.Module.Network
 {
-    public class NetworkDescriptor : CategoryDescriptor
+    public class NetworkDescriptor : AbstractDescriptor
     {
         public NetworkDescriptor() : base(
             name: "Network",
             cmdArg: "--network",
-            parameter: "network",
-            description: "All network modules"
+            description: "All network modules",
+            scraper:null
         )
         {
         }

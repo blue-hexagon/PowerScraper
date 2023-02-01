@@ -4,7 +4,7 @@
     {
         public string Serialize(Dictionary<string, Dictionary<string, string>> scrapedContent)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
     }
 }

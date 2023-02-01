@@ -1,12 +1,14 @@
-﻿namespace PowerScraper.Core.Scraping.Module.Uncategorized
+﻿using PowerScraper.Core.Scraping.DataStructure;
+
+namespace PowerScraper.Core.Scraping.Module.Uncategorized
 {
-    public class UncategorizedDescriptor : CategoryDescriptor
+    public class UncategorizedDescriptor : AbstractDescriptor
     {
         public UncategorizedDescriptor() : base(
             name: "Uncategorized",
             cmdArg: "--uncategorized",
-            parameter: "uncategorized",
-            description: "All uncategorized modules"
+            description: "All uncategorized modules",
+            scraper: null
         )
         {
         }

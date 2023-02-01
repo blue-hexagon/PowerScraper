@@ -1,12 +1,14 @@
-﻿namespace PowerScraper.Core.Scraping.Module.Software
+﻿using PowerScraper.Core.Scraping.DataStructure;
+
+namespace PowerScraper.Core.Scraping.Module.Software
 {
-    public class SoftwareDescriptor : CategoryDescriptor
+    public class SoftwareDescriptor : AbstractDescriptor
     {
         public SoftwareDescriptor() : base(
             name: "Software",
             cmdArg: "--software",
-            parameter: "software",
-            description: "All software modules"
+            description: "All software modules",
+            scraper:null
             )
         {
             

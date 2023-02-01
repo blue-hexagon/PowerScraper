@@ -16,23 +16,6 @@ public static class PlatformReader
             return Platform.OsX;
         if (RuntimeInformation.IsOSPlatform(OSPlatform.FreeBSD))
             return Platform.FreeBsd;
-        throw new PlatformNotSupportedException("Unknown platform");
-    }
-
-    public static void PlatformSwitch()
-    {
-        switch (PlatformInUse)
-        {
-            case Platform.Windows:
-                break;
-            case Platform.Linux:
-                break;
-            case Platform.OsX:
-                break;
-            case Platform.FreeBsd:
-                break;
-            default:
-                throw new ArgumentOutOfRangeException();
-        }
+        throw new PlatformNotSupportedException("Unsupported platform: supported platforms are: Windows, Linux, OS X and FreeBSD.");
     }
 }

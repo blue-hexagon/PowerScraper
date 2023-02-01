@@ -2,8 +2,8 @@
 {
     public static class ExitStatus
     {
-        public static readonly int Succes = 0;
-        public static readonly int BadArgument = 2;
-        public static readonly int Error = 3;
+        public const int Success = 0;
+        public const int BadArgument = 2;
+        public const int Error = 3;
     }
 }

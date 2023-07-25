@@ -1,29 +1,30 @@
 ﻿using PowerScraper.Core.Scraping.DataStructure;
+using PowerScraper.Core.Scraping.DataStructure.Collection;
 
 namespace PowerScraper.Core.Scraping.Module.Hardware.Harddrive
 {
     public sealed class HarddriveScraper : AbstractScraper, IScraper
     {
-        public List<Dictionary<string, string>> ScrapeWindows()
+        public CollectionTree ScrapeWindows(CollectionTree collectionNodeInstance)
         {
             var psObjects = TransientShell.InvokeRawScript(@"
                 Get-CimInstance Win32_LogicalDisk | Select-Object DeviceID, DriveType, ProviderName, VolumeName, Size, FreeSpace");
             var OutputCollection = TransientShell.ParsePsObjects(psObjects);
 
-            return OutputCollection;
+            return collectionNodeInstance;
         }
 
-        public List<Dictionary<string, string>> ScrapeLinux()
+        public CollectionTree ScrapeLinux()
         {
             throw new NotImplementedException();
         }
 
-        public List<Dictionary<string, string>> ScrapeOsX()
+        public CollectionTree ScrapeOsX()
         {
             throw new NotImplementedException();
         }
 
-        public List<Dictionary<string, string>> ScrapeFreeBsd()
+        public CollectionTree ScrapeFreeBsd()
         {
             throw new NotImplementedException();
         }

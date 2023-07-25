@@ -1,12 +1,13 @@
 ﻿//using System.Net.NetworkInformation;
 
 using PowerScraper.Core.Scraping.DataStructure;
+using PowerScraper.Core.Scraping.DataStructure.Collection;
 
 namespace PowerScraper.Core.Scraping.Module.Network.Interface
 {
     public sealed class InterfaceScraper : AbstractScraper, IScraper
     {
-        public List<Dictionary<string, string>> ScrapeWindows()
+        public CollectionTree ScrapeWindows(CollectionTree collectionNodeInstance)
         {
             // var psObjects = ReusableShell.InvokeRawCommand(@"
             // Get-NetAdapter -Physical | Select-Object Name, InterfaceDescription,
@@ -33,20 +34,20 @@ namespace PowerScraper.Core.Scraping.Module.Network.Interface
             //     // nestedEntrance.Add("Dynamically Configured DNS", properties.IsDynamicDnsEnabled.ToString());
             // }
 
-            return OutputCollection;
+            return collectionNodeInstance;
         }
 
-        public List<Dictionary<string, string>> ScrapeLinux()
+        public CollectionTree ScrapeLinux()
         {
             throw new NotImplementedException();
         }
 
-        public List<Dictionary<string, string>> ScrapeOsX()
+        public CollectionTree ScrapeOsX()
         {
             throw new NotImplementedException();
         }
 
-        public List<Dictionary<string, string>> ScrapeFreeBsd()
+        public CollectionTree ScrapeFreeBsd()
         {
             throw new NotImplementedException();
         }

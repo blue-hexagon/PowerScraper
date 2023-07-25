@@ -6,26 +6,25 @@ namespace PowerScraper.UnitTests.Core
     [TestFixture]
     public class TransientShellTests
     {
-        /** This test indirectly verifies that our runspace is restricted to only a handful of cmdlets */
         [Test]
-        public void InvokeRawCommand_GivenCmdletIsNotContainedInRunspace_ReturnsEmptyCollection()
+        public void InvokeRawCommand_GivenCmdletIsNotContainedInRunspace_ShouldReturnEmptyCollection()
         {
             TransientShell.InitializeRunspace();
             var result = TransientShell.InvokeRawScript("Get-History");
             TransientShell.CloseRunspace();
 
-            Assert.IsEmpty(result);
+            Assert.That(result, Is.Empty);
         }
 
         [Test]
-        public void InvokeRawCommand_CommandIsNull_ThrowsException()
+        public void InvokeRawCommand_CommandIsNull_ShouldThrowException()
         {
             TransientShell.InitializeRunspace();
             Assert.Throws<PSArgumentNullException>(() => TransientShell.InvokeRawScript(null!));
         }
 
         [Test]
-        public void CloseRunspace_RunspaceIsInitialized_DoesNotThrowException()
+        public void CloseRunspace_RunspaceIsInitialized_ShouldNotThrowException()
         {
             TransientShell.InitializeRunspace();
             Assert.DoesNotThrow(TransientShell.CloseRunspace);

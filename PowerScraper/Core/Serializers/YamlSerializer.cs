@@ -1,11 +1,12 @@
-﻿using YamlDotNet.Serialization;
+﻿using PowerScraper.Core.Scraping.DataStructure.Collection;
+using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
 
 namespace PowerScraper.Core.Serializers
 {
     public class YamlSerializer : ISerializer
     {
-        public string Serialize(Dictionary<string, Dictionary<string, string>> scrapedContent)
+        public string Serialize(CollectionTree scrapedContent)
         {
             var serializer = new SerializerBuilder()
                 .DisableAliases()

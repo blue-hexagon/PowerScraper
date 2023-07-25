@@ -1,7 +1,4 @@
-﻿using PowerScraper.Core.Scraping;
-using PowerScraper.Core.Scraping.DataStructure;
-using PowerScraper.Core.Scraping.Module.Hardware.Cpu;
-using PowerScraper.Core.Utility;
+﻿using PowerScraper.Core.Scraping.DataStructure;
 
 namespace PowerScraper.Core
 {
@@ -10,8 +7,7 @@ namespace PowerScraper.Core
         public static List<AbstractDescriptor> ParseCommandLineArguments(string[] arguments)
         {
             var collectors = new List<AbstractDescriptor>();
-            // TreeAccessor.MakeTree();
-            // var leafs  = TreeAccessor.RootNode.FindChild("hardware").ReturnSubTreeNodes();
+
             foreach (var arg in arguments)
             {
                 if (!DescriptorNode.DescriptorNodeIndex.ContainsKey(arg))
@@ -27,17 +23,18 @@ namespace PowerScraper.Core
                 }
             }
 
-            // Debug Start
-            Console.WriteLine("Collector Count:" + collectors.Count);
-            for (int i = 0; i < collectors.Count; i++)
+            if (false) // debug
             {
-                Console.WriteLine($"Collector {i}: " + collectors.ToArray()[i].Name +
-                                  $"\nIs Category or Scraper? {collectors.ToArray()[i].Scraper}");
-            } // Debug End
-
+                Console.WriteLine("Collector Count:" + collectors.Count);
+                for (int i = 0; i < collectors.Count; i++)
+                {
+                    Console.WriteLine($"Collector {i}: " + collectors.ToArray()[i].Name +
+                                      $"\nIs Category or Scraper? {collectors.ToArray()[i].Scraper}");
+                }
+            }
 
             /* Duplicates may exists in collectors list, therefore remove them by
-             turning the list into a hashset and back into a list */
+               turning the list into a hashset and back into a list */
             return new List<AbstractDescriptor>(collectors.ToHashSet());
         }
     }

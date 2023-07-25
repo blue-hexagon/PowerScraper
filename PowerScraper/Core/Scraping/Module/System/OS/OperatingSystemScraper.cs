@@ -1,11 +1,13 @@
 using PowerScraper.Core.Scraping.DataStructure;
+using PowerScraper.Core.Scraping.DataStructure.Collection;
 
 namespace PowerScraper.Core.Scraping.Module.System.OS
 {
     public sealed class OperatingSystemScraper : AbstractScraper, IScraper
     {
-        public List<Dictionary<string, string>> ScrapeWindows()
+        public CollectionTree ScrapeWindows(CollectionTree collectionNodeInstance)
         {
+            collectionNodeInstance.ModuleName = "Operating System";
             var psObjects = TransientShell.InvokeRawScript(@"
                 Get-CimInstance Win32_OperatingSystem | Select-Object BootDevice,BuildNumber,BuildType,CodeSet,CountryCode,
                 CurrentTimeZone,
@@ -15,20 +17,20 @@ namespace PowerScraper.Core.Scraping.Module.System.OS
                 ");
 
             OutputCollection = TransientShell.ParsePsObjects(psObjects);
-            return OutputCollection;
+            return collectionNodeInstance;
         }
 
-        public List<Dictionary<string, string>> ScrapeLinux()
+        public CollectionTree ScrapeLinux()
         {
             throw new NotImplementedException();
         }
 
-        public List<Dictionary<string, string>> ScrapeOsX()
+        public CollectionTree ScrapeOsX()
         {
             throw new NotImplementedException();
         }
 
-        public List<Dictionary<string, string>> ScrapeFreeBsd()
+        public CollectionTree ScrapeFreeBsd()
         {
             throw new NotImplementedException();
         }

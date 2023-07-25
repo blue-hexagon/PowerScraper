@@ -56,17 +56,20 @@ public static class TransientShell
             {
                 if (entry.Value == null)
                     continue;
-                try
-                {
-                    psObj.Add(entry.Name, entry.Value.ToString()!);
-                }
-                catch (ArgumentException e)
-                {
-                    output.Add(psObj);
-                    psObj = new Dictionary<string, string>();
-                }
+                psObj.Add(entry.Name, entry.Value.ToString()!);
+                // try
+                // {
+                // }
+                // catch (ArgumentException e)
+                // {
+                // output.Add(psObj);
+                // psObj = new Dictionary<string, string>();
+                // }
             }
         }
+
+        output.Add(psObj);
+
 
         return output;
     }

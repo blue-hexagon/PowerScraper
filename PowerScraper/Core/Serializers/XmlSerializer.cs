@@ -1,8 +1,10 @@
-﻿namespace PowerScraper.Core.Serializers
+﻿using PowerScraper.Core.Scraping.DataStructure.Collection;
+
+namespace PowerScraper.Core.Serializers
 {
     public class XmlSerializer: ISerializer
     {
-        public string Serialize(Dictionary<string, Dictionary<string, string>> scrapedContent)
+        public string Serialize(CollectionTree scrapedContent)
         {
             throw new NotImplementedException();
         }

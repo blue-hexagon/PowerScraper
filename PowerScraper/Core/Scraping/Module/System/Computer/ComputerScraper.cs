@@ -1,11 +1,13 @@
 ﻿using PowerScraper.Core.Scraping.DataStructure;
+using PowerScraper.Core.Scraping.DataStructure.Collection;
 
 namespace PowerScraper.Core.Scraping.Module.System.Computer
 {
     public sealed class ComputerScraper : AbstractScraper, IScraper
     {
-        public List<Dictionary<string, string>> ScrapeWindows()
+        public CollectionTree ScrapeWindows(CollectionTree collectionNodeInstance)
         {
+            collectionNodeInstance.ModuleName = "Computer";
             var psObjects = TransientShell.InvokeRawScript(@"
                 Get-CimInstance Win32_ComputerSystem | Select-Object DNSHostName,Domain,DomainRole,DaylightInEffect,
                 CurrentTimeZone,AdminPasswordStatus,HypervisorPresent,InfraredSupported,
@@ -13,20 +15,20 @@ namespace PowerScraper.Core.Scraping.Module.System.Computer
                 TotalPhysicalMemory,UserName
                 ");
             OutputCollection = TransientShell.ParsePsObjects(psObjects);
-            return OutputCollection;
+            return collectionNodeInstance;
         }
 
-        public List<Dictionary<string, string>> ScrapeLinux()
+        public CollectionTree ScrapeLinux()
         {
             throw new NotImplementedException();
         }
 
-        public List<Dictionary<string, string>> ScrapeOsX()
+        public CollectionTree ScrapeOsX()
         {
             throw new NotImplementedException();
         }
 
-        public List<Dictionary<string, string>> ScrapeFreeBsd()
+        public CollectionTree ScrapeFreeBsd()
         {
             throw new NotImplementedException();
         }

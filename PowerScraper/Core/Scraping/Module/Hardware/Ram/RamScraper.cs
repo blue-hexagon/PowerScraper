@@ -1,30 +1,31 @@
 ﻿using PowerScraper.Core.Scraping.DataStructure;
+using PowerScraper.Core.Scraping.DataStructure.Collection;
 
 namespace PowerScraper.Core.Scraping.Module.Hardware.Ram
 {
     public sealed class RamScraper : AbstractScraper, IScraper
     {
-        public List<Dictionary<string, string>> ScrapeWindows()
+        public CollectionTree ScrapeWindows(CollectionTree collectionNodeInstance)
         {
             // var psObjects = TransientShell.InvokeRawScript(@"
             //     Get-CimInstance Win32_Processor | Select-Object ");
             // OutputCollection = TransientShell.ParsePsObjects(psObjects);
 
             // return OutputCollection;
-            return new List<Dictionary<string, string>>();
+            return new CollectionTree();
         }
 
-        public List<Dictionary<string, string>> ScrapeLinux()
+        public CollectionTree ScrapeLinux()
         {
             throw new NotImplementedException();
         }
 
-        public List<Dictionary<string, string>> ScrapeOsX()
+        public CollectionTree ScrapeOsX()
         {
             throw new NotImplementedException();
         }
 
-        public List<Dictionary<string, string>> ScrapeFreeBsd()
+        public CollectionTree ScrapeFreeBsd()
         {
             throw new NotImplementedException();
         }

@@ -1,5 +1,3 @@
-using PowerScraper.Core.Scraping;
-using PowerScraper.Core.Scraping.DataStructure;
 using PowerScraper.Core.Scraping.Module.All;
 using PowerScraper.Core.Scraping.Module.Hardware;
 using PowerScraper.Core.Scraping.Module.Hardware.Cpu;
@@ -22,7 +20,7 @@ using PowerScraper.Core.Scraping.Module.Uncategorized;
 // @formatter:off
 namespace PowerScraper.Core.Scraping.DataStructure;
 
-public static class TreeAccessor
+public static class TreeAccessor // Change to: DescriptorTreeAccessor?
 {
     public static DescriptorNode RootDescriptorNode { get; } = new(new AllDescriptor());
     

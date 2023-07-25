@@ -1,18 +1,27 @@
+using PowerScraper.Core.Utility;
+using YamlDotNet.Core;
+using YamlDotNet.Core.Events;
+
 namespace PowerScraper.Core.Scraping.DataStructure.Collection;
 
-public class CollectionTree
+using YamlDotNet.Serialization;
+
+public class CollectionTree : IYamlConvertible
 {
     private CollectionTree? ParentNode { get; set; }
+
     public string ModuleName { get; set; }
-    
+
     public List<CollectionTree> Nodes { get; set; } = new();
-    public List<(string,string)> Items { get; set; }= new();
-    
+
+    public List<Item> Items { get; set; } = new();
+
 
     public CollectionTree()
     {
-        ModuleName = "Generic Module Name";
+        ModuleName = "Module name was not set! - Set it in the first line of the Scraper Logic";
     }
+
     public CollectionTree(string moduleName)
     {
         ModuleName = moduleName;
@@ -36,18 +45,18 @@ public class CollectionTree
                     Console.WriteLine(child.ModuleName);
                     foreach (var item in child.Items)
                     {
-                        Console.WriteLine(item.Item1 + " : " + item.Item2);
+                        Console.WriteLine(item.Key + " : " + item.Value);
                     }
                 }
             }
 
             foreach (var item in node.Items)
             {
-                Console.WriteLine(item.Item1 + " : " + item.Item2);
+                Console.WriteLine(item.Key + " : " + item.Value);
             }
-
         }
     }
+
     public static List<CollectionTree> DfsList(CollectionTree root)
     {
         var dfsList = new List<CollectionTree>();
@@ -77,7 +86,7 @@ public class CollectionTree
 
     public void AddItem(string key, string value)
     {
-        Items.Add((key, value));
+        Items.Add(new Item(key, value));
     }
 
     public override string ToString()
@@ -85,4 +94,45 @@ public class CollectionTree
         return ModuleName;
     }
 
+    public void Read(IParser parser, Type expectedType, ObjectDeserializer nestedObjectDeserializer)
+    {
+        // Deserialize into a list of KeyValuePair
+        Items = nestedObjectDeserializer(typeof(List<Item>)) as List<Item>;
+    }
+
+    public void Write(IEmitter emitter, ObjectSerializer nestedObjectSerializer)
+    {
+        if (ModuleName == VersionStatus.ApplicationTag) // Root node
+        {
+            emitter.Emit(new MappingStart(null, null, false, MappingStyle.Block));
+        }
+
+        emitter.Emit(new Scalar(null, ModuleName));
+        emitter.Emit(new MappingStart(null, null, false, MappingStyle.Block));
+
+
+        if (Items.Count > 0)
+        {
+            foreach (var item in Items)
+            {
+                emitter.Emit(new Scalar(null, item.Key));
+                emitter.Emit(new Scalar(null, item.Value));
+            }
+        }
+
+        if (Nodes.Count > 0)
+        {
+            foreach (var node in Nodes)
+            {
+                nestedObjectSerializer(node);
+            }
+        }
+
+        emitter.Emit(new MappingEnd());
+
+        if (ModuleName == VersionStatus.ApplicationTag)
+        {
+            emitter.Emit(new MappingEnd());
+        }
+    }
 }

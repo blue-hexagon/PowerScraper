@@ -19,23 +19,22 @@ namespace PowerScraper
     {
         public static void Main(string[] args)
         {
+            new Runner(UnitConversion.Bases.Base10, SerializationFormat.Yaml).Execute(args);
             
+            //var runner = new Runner(serializer: SerializationFormat.Json);
+            //runner.Execute(args: args);
+
+
+            //
             //TestProgram.TestEnumerator();
             //TestProgram.TestYamlSerializer();
             //TestProgram.TestRootTraverser();
-            TestApplication(args);
+
             //Environment.Exit(0);
 
             //TestProgram.TestJsonSerializer();
 
             // var collectors = new List<DescriptorNode> { new CpuDescriptor(), new ComputerDescriptor() };
-        }
-
-        private static void TestApplication(string[] args)
-        {
-            new Runner(UnitConversion.Bases.Base10, SerializationFormat.Yaml).Execute(args);
-            //var runner = new Runner(serializer: SerializationFormat.Json);
-            //runner.Execute(args: args);
         }
     }
 }

@@ -1,25 +1,26 @@
 ﻿using PowerScraper.Core.Scraping.DataStructure;
+using PowerScraper.Core.Scraping.DataStructure.Collection;
 
 namespace PowerScraper.Core.Scraping.Module.Network.Ssid
 {
     public sealed class SsidScraper : AbstractScraper, IScraper
     {
-        public List<Dictionary<string, string>> ScrapeWindows()
+        public CollectionTree ScrapeWindows(CollectionTree collectionNodeInstance)
         {
-            return new List<Dictionary<string, string>>();
+            return new CollectionTree();
         }
 
-        public List<Dictionary<string, string>> ScrapeLinux()
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<Dictionary<string, string>> ScrapeOsX()
+        public CollectionTree ScrapeLinux()
         {
             throw new NotImplementedException();
         }
 
-        public List<Dictionary<string, string>> ScrapeFreeBsd()
+        public CollectionTree ScrapeOsX()
+        {
+            throw new NotImplementedException();
+        }
+
+        public CollectionTree ScrapeFreeBsd()
         {
             throw new NotImplementedException();
         }

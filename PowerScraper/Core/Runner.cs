@@ -9,19 +9,20 @@ namespace PowerScraper.Core
 {
     public class Runner
     {
-        
         private readonly SerializationFormat _serializer;
 
         public Runner(
             UnitConversion.Bases unitBase = UnitConversion.Bases.Base2,
-            SerializationFormat serializer = SerializationFormat.Json
-            ) 
-        { 
+            SerializationFormat serializer = SerializationFormat.Json)
+        {
             Trace.Listeners.Add(new TextWriterTraceListener("errors.log"));
             Trace.AutoFlush = true;
 
+            /* Important configuration settings */
             TreeAccessor.MakeTree();
             TransientShell.InitializeRunspace();
+
+            
 
             UnitConversion.BaseUsed = unitBase;
             PlatformReader.PlatformInUse = PlatformReader.IdentifyPlatform();
@@ -39,12 +40,12 @@ namespace PowerScraper.Core
             Environment.Exit(ExitStatus.Success);
         }
 
-
-        public void Execute(List<AbstractDescriptor> collectorDescriptors)
-        {
-            AppView.Display(_serializer, collectorDescriptors);
-            Environment.Exit(ExitStatus.Success);
-        }
+        // Never used
+        // public void Execute(List<AbstractDescriptor> collectorDescriptors)
+        // {
+        // AppView.Display(_serializer, collectorDescriptors);
+        // Environment.Exit(ExitStatus.Success);
+        // }
 
         private static void IfHelpArg(IReadOnlyList<string> args)
         {
@@ -59,6 +60,7 @@ namespace PowerScraper.Core
             HelpView.VerboseDisplay();
             Environment.Exit(ExitStatus.Success);
         }
+
         private void IfBadArg(string[] args)
         {
             foreach (var arg in args)
@@ -76,6 +78,5 @@ namespace PowerScraper.Core
                 }
             }
         }
-
     }
 }

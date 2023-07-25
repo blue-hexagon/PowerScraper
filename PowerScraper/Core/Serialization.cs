@@ -1,4 +1,5 @@
 using System.ComponentModel;
+using PowerScraper.Core.Scraping.DataStructure.Collection;
 using PowerScraper.Core.Serializers;
 using PowerScraper.Core.Utility;
 
@@ -7,7 +8,7 @@ namespace PowerScraper.Core;
 public static class Serializer
 {
     public static string SerializeScrapedOutput(SerializationFormat formatting,
-        Dictionary<string, Dictionary<string, string>> scrapedContent)
+        CollectionTree scrapedContent)
     {
         var serializedOutput = formatting switch
         {

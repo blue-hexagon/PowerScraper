@@ -1,7 +1,9 @@
-﻿namespace PowerScraper.Core.Serializers
+﻿using PowerScraper.Core.Scraping.DataStructure.Collection;
+
+namespace PowerScraper.Core.Serializers
 {
     public interface ISerializer
     {
-        string Serialize(Dictionary<string, Dictionary<string, string>> scrapedContent);
+        string Serialize(CollectionTree scrapedContent);
     }
 }

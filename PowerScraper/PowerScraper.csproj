@@ -15,22 +15,18 @@
         <RepositoryUrl>https://github.com/blue-hexagon/PowerScraper</RepositoryUrl>
         <PackageTags>system information-gathering-tool specs</PackageTags>
         <PackageReleaseNotes>Pre-release. In development.</PackageReleaseNotes>
-        <ApplicationIcon>icons8-lightning-bolt-50.ico</ApplicationIcon>
+        <ApplicationIcon>icon.ico</ApplicationIcon>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Microsoft.PowerShell.SDK" Version="7.3.2" />
-      <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
-      <PackageReference Include="Pastel" Version="4.1.0" />
-      <PackageReference Include="PowerShellStandard.Library" Version="5.1.1" />
-      <PackageReference Include="Samboy063.Tomlet" Version="5.1.2" />
-      <PackageReference Include="System.Management.Automation" Version="7.3.2" />
-      <PackageReference Include="YamlDotNet" Version="13.1.1" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Core\Configuration" />
+        <PackageReference Include="Microsoft.PowerShell.SDK" Version="7.3.2" />
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
+        <PackageReference Include="Pastel" Version="4.1.0" />
+        <PackageReference Include="PowerShellStandard.Library" Version="5.1.1" />
+        <PackageReference Include="Samboy063.Tomlet" Version="5.1.2" />
+        <PackageReference Include="System.Management.Automation" Version="7.3.2" />
+        <PackageReference Include="YamlDotNet" Version="13.1.1" />
     </ItemGroup>
 
 </Project>

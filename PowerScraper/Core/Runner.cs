@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics;
-using PowerScraper.Core.Scraping;
 using PowerScraper.Core.Scraping.DataStructure;
 using PowerScraper.Core.Utility;
 using PowerScraper.Core.Utility.OS;
@@ -18,11 +17,10 @@ namespace PowerScraper.Core
             Trace.Listeners.Add(new TextWriterTraceListener("errors.log"));
             Trace.AutoFlush = true;
 
-            /* Important configuration settings */
+            /* Critical program initialization */
             TreeAccessor.MakeTree();
             TransientShell.InitializeRunspace();
 
-            
 
             UnitConversion.BaseUsed = unitBase;
             PlatformReader.PlatformInUse = PlatformReader.IdentifyPlatform();
@@ -36,16 +34,10 @@ namespace PowerScraper.Core
             IfHelpArg(args);
             IfBadArg(args);
             var collectorDescriptors = ArgParser.ParseCommandLineArguments(args);
-            AppView.Display(_serializer, collectorDescriptors);
+            var serializedOutput = AppView.Serialize(_serializer, collectorDescriptors);
+            AppView.Display(serializedOutput);
             Environment.Exit(ExitStatus.Success);
         }
-
-        // Never used
-        // public void Execute(List<AbstractDescriptor> collectorDescriptors)
-        // {
-        // AppView.Display(_serializer, collectorDescriptors);
-        // Environment.Exit(ExitStatus.Success);
-        // }
 
         private static void IfHelpArg(IReadOnlyList<string> args)
         {
@@ -61,8 +53,10 @@ namespace PowerScraper.Core
             Environment.Exit(ExitStatus.Success);
         }
 
-        private void IfBadArg(string[] args)
+        private static void IfBadArg(IEnumerable<string> args)
         {
+            var badArgs = new List<string>();
+
             foreach (var arg in args)
             {
                 try
@@ -71,12 +65,17 @@ namespace PowerScraper.Core
                 }
                 catch (KeyNotFoundException e)
                 {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine($"Received at least one (possibly more) bad argument(s): {arg}");
-                    Console.ForegroundColor = ConsoleColor.White;
-                    Environment.Exit(ExitStatus.BadArgument);
+                    badArgs.Add(arg);
                 }
             }
+
+            if (badArgs.Count == 0) return;
+
+            var allBadArgs = string.Join(" ", badArgs);
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine($"Received one or more bad argument(s): {allBadArgs}");
+            Console.ForegroundColor = ConsoleColor.White;
+            Environment.Exit(ExitStatus.BadArgument);
         }
     }
 }

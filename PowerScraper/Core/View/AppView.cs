@@ -6,12 +6,17 @@ namespace PowerScraper.Core.View
 {
     public static class AppView
     {
-        public static void Display(SerializationFormat formatting, List<AbstractDescriptor> collectorDescriptors)
+        public static string Serialize(SerializationFormat formatting, List<AbstractDescriptor> collectorDescriptors)
         {
             var scrapedContent = ScrapingBuilder.PerformScraping(collectorDescriptors);
             var serializedOutput = Serializer.SerializeScrapedOutput(formatting, scrapedContent);
-            Console.WriteLine(serializedOutput);
             TransientShell.CloseRunspace();
+            return serializedOutput;
+        }
+
+        public static void Display(string serializedOutput)
+        {
+            Console.WriteLine(serializedOutput);
         }
     }
 }

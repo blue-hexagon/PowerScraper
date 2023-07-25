@@ -12,9 +12,8 @@ namespace PowerScraper.Core.Scraping.Module.System.Computer
                 Get-CimInstance Win32_ComputerSystem | Select-Object DNSHostName,Domain,DomainRole,DaylightInEffect,
                 CurrentTimeZone,AdminPasswordStatus,HypervisorPresent,InfraredSupported,
                 Manufacturer,Model,Name,PartOfDomain,PrimaryOwnerName,SystemFamily,SystemSKUNumber,SystemType,
-                TotalPhysicalMemory,UserName
-                ");
-            OutputCollection = TransientShell.ParsePsObjects(psObjects);
+                TotalPhysicalMemory,UserName");
+            TransientShell.ParsePsObjects(psObjects, collectionNodeInstance);
             return collectionNodeInstance;
         }
 

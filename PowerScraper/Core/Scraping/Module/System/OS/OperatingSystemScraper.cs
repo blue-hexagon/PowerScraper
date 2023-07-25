@@ -13,10 +13,9 @@ namespace PowerScraper.Core.Scraping.Module.System.OS
                 CurrentTimeZone,
                 FreePhysicalMemory,FreeVirtualMemory,TotalVirtualMemorySize,TotalVisibleMemorySize,
                 InstallDate,LastBootUpTime,LocalDateTime,Locale,NumberOfProcesses,NumberOfUsers,Organization,
-                OSLanguage,SizeStoredInPagingFiles,SystemDrive,WindowsDirectory
-                ");
+                OSLanguage,SizeStoredInPagingFiles,SystemDrive,WindowsDirectory");
 
-            OutputCollection = TransientShell.ParsePsObjects(psObjects);
+            TransientShell.ParsePsObjects(psObjects, collectionNodeInstance);
             return collectionNodeInstance;
         }
 

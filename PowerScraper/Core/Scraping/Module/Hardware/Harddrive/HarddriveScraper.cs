@@ -7,9 +7,10 @@ namespace PowerScraper.Core.Scraping.Module.Hardware.Harddrive
     {
         public CollectionTree ScrapeWindows(CollectionTree collectionNodeInstance)
         {
+            collectionNodeInstance.ModuleName = "Harddrive";
             var psObjects = TransientShell.InvokeRawScript(@"
                 Get-CimInstance Win32_LogicalDisk | Select-Object DeviceID, DriveType, ProviderName, VolumeName, Size, FreeSpace");
-            var OutputCollection = TransientShell.ParsePsObjects(psObjects);
+            TransientShell.ParsePsObjects(psObjects, collectionNodeInstance);
 
             return collectionNodeInstance;
         }

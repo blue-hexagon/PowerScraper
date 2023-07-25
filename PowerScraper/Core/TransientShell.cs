@@ -2,6 +2,7 @@
 using System.Management.Automation;
 using System.Management.Automation.Runspaces;
 using Microsoft.PowerShell.Commands;
+using PowerScraper.Core.Scraping.DataStructure.Collection;
 
 namespace PowerScraper.Core;
 
@@ -31,47 +32,17 @@ public static class TransientShell
         return content;
     }
 
-    // public static Dictionary<string, string> ParsePsObjects(Collection<PSObject> psObjects)
-    // {
-    //     var output = new Dictionary<string, string>();
-    //     foreach (var member in psObjects)
-    //     {
-    //         foreach (var entry in member.Properties)
-    //         {
-    //             if (entry.Value == null)
-    //                 continue;
-    //             output.Add(entry.Name, entry.Value.ToString()!);
-    //         }
-    //     }
-    //
-    //     return output;
-    // }   
-    public static List<Dictionary<string, string>> ParsePsObjects(Collection<PSObject> psObjects)
+    public static void ParsePsObjects(Collection<PSObject> psObjects, CollectionTree collectionNodeInstance)
     {
-        var output = new List<Dictionary<string, string>>();
-        var psObj = new Dictionary<string, string>();
         foreach (var member in psObjects)
         {
             foreach (var entry in member.Properties)
             {
                 if (entry.Value == null)
                     continue;
-                psObj.Add(entry.Name, entry.Value.ToString()!);
-                // try
-                // {
-                // }
-                // catch (ArgumentException e)
-                // {
-                // output.Add(psObj);
-                // psObj = new Dictionary<string, string>();
-                // }
+                collectionNodeInstance.AddItem(entry.Name, entry.Value.ToString()!);
             }
         }
-
-        output.Add(psObj);
-
-
-        return output;
     }
 
     public static void CloseRunspace()

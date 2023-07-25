@@ -7,12 +7,13 @@ namespace PowerScraper.Core.Scraping.Module.Hardware.Ram
     {
         public CollectionTree ScrapeWindows(CollectionTree collectionNodeInstance)
         {
+            collectionNodeInstance.ModuleName = "RAM";
             // var psObjects = TransientShell.InvokeRawScript(@"
             //     Get-CimInstance Win32_Processor | Select-Object ");
             // OutputCollection = TransientShell.ParsePsObjects(psObjects);
 
             // return OutputCollection;
-            return new CollectionTree();
+            return collectionNodeInstance;
         }
 
         public CollectionTree ScrapeLinux()

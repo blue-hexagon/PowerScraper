@@ -27,61 +27,10 @@ public class CollectionTree : IYamlConvertible
         ModuleName = moduleName;
     }
 
-    public void TraverseCollection()
-    {
-        InnerFunction(this);
-
-        void InnerFunction(CollectionTree node)
-        {
-            Console.WriteLine(node.ModuleName);
-            foreach (var child in node.Nodes)
-            {
-                if (child.Nodes.Count != 0)
-                {
-                    InnerFunction(child);
-                }
-                else
-                {
-                    Console.WriteLine(child.ModuleName);
-                    foreach (var item in child.Items)
-                    {
-                        Console.WriteLine(item.Key + " : " + item.Value);
-                    }
-                }
-            }
-
-            foreach (var item in node.Items)
-            {
-                Console.WriteLine(item.Key + " : " + item.Value);
-            }
-        }
-    }
-
-    public static List<CollectionTree> DfsList(CollectionTree root)
-    {
-        var dfsList = new List<CollectionTree>();
-        InnerFunction(root);
-
-        void InnerFunction(CollectionTree node)
-        {
-            dfsList.Add(node);
-            foreach (var child in node.Nodes)
-            {
-                if (child.Nodes.Count != 0)
-                    InnerFunction(child);
-                else
-                    dfsList.Add(child);
-            }
-        }
-
-        return dfsList;
-    }
-
-    public CollectionTree InsertModule(CollectionTree node)
+    public void InsertModule(CollectionTree node)
     {
         Nodes.Add(node);
         node.ParentNode = this;
-        return node;
     }
 
     public void AddItem(string key, string value)
@@ -96,14 +45,15 @@ public class CollectionTree : IYamlConvertible
 
     public void Read(IParser parser, Type expectedType, ObjectDeserializer nestedObjectDeserializer)
     {
-        // Deserialize into a list of KeyValuePair
-        Items = nestedObjectDeserializer(typeof(List<Item>)) as List<Item>;
+        throw new NotSupportedException();
     }
 
     public void Write(IEmitter emitter, ObjectSerializer nestedObjectSerializer)
     {
         if (ModuleName == VersionStatus.ApplicationTag) // Root node
         {
+            // Have to put in guard rails for the MappingStart and MappingEnd of the root node
+            // because of the calls to nestedObjectSerializer.
             emitter.Emit(new MappingStart(null, null, false, MappingStyle.Block));
         }
 
@@ -134,5 +84,57 @@ public class CollectionTree : IYamlConvertible
         {
             emitter.Emit(new MappingEnd());
         }
+    }
+
+    //TODO: Reconsider if this has any use cases or should be deleted
+    public void TraverseCollection()
+    {
+        InnerFunction(this);
+
+        void InnerFunction(CollectionTree node)
+        {
+            Console.WriteLine(node.ModuleName);
+            foreach (var child in node.Nodes)
+            {
+                if (child.Nodes.Count != 0)
+                {
+                    InnerFunction(child);
+                }
+                else
+                {
+                    Console.WriteLine(child.ModuleName);
+                    foreach (var item in child.Items)
+                    {
+                        Console.WriteLine(item.Key + " : " + item.Value);
+                    }
+                }
+            }
+
+            foreach (var item in node.Items)
+            {
+                Console.WriteLine(item.Key + " : " + item.Value);
+            }
+        }
+    }
+
+    //TODO: Reconsider if this has any use cases or should be deleted
+    public static List<CollectionTree> DfsList(CollectionTree root)
+    {
+        var dfsList = new List<CollectionTree>();
+        InnerFunction(root);
+
+        void InnerFunction(CollectionTree node)
+        {
+            dfsList.Add(node);
+            foreach (var child in node.Nodes)
+            {
+                if (child.Nodes.Count != 0)
+                    InnerFunction(child);
+                else
+                    dfsList.Add(child);
+            }
+        }
+
+        return dfsList;
     }
 }

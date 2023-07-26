@@ -16,9 +16,9 @@ public static class ScrapingBuilder
             var result = PlatformReader.PlatformInUse switch
             {
                 Platform.Windows => descriptor.Scraper!.ScrapeWindows(new CollectionTree()),
-                Platform.Linux => descriptor.Scraper!.ScrapeLinux(),
-                Platform.OsX => descriptor.Scraper!.ScrapeOsX(),
-                Platform.FreeBsd => descriptor.Scraper!.ScrapeFreeBsd(),
+                Platform.Linux => descriptor.Scraper!.ScrapeLinux(new CollectionTree()),
+                Platform.OsX => descriptor.Scraper!.ScrapeOsX(new CollectionTree()),
+                Platform.FreeBsd => descriptor.Scraper!.ScrapeFreeBsd(new CollectionTree()),
                 _ => throw new PlatformNotSupportedException()
             };
             scrapedContent.InsertModule(result);

@@ -3,7 +3,7 @@ using PowerScraper.Core.Scraping.DataStructure.Collection;
 
 namespace PowerScraper.Core.Scraping.Module.System.Computer
 {
-    public sealed class ComputerScraper : AbstractScraper, IScraper
+    public sealed class ComputerScraper :  IScraper
     {
         public CollectionTree ScrapeWindows(CollectionTree collectionNodeInstance)
         {
@@ -13,21 +13,21 @@ namespace PowerScraper.Core.Scraping.Module.System.Computer
                 CurrentTimeZone,AdminPasswordStatus,HypervisorPresent,InfraredSupported,
                 Manufacturer,Model,Name,PartOfDomain,PrimaryOwnerName,SystemFamily,SystemSKUNumber,SystemType,
                 TotalPhysicalMemory,UserName");
-            TransientShell.ParsePsObjects(psObjects, collectionNodeInstance);
+            TransientShell.ParsePsObjectsAndAddItemsToNode(psObjects, null, collectionNodeInstance);
             return collectionNodeInstance;
         }
 
-        public CollectionTree ScrapeLinux()
+        public CollectionTree ScrapeLinux(CollectionTree collectionNodeInstance)
         {
             throw new NotImplementedException();
         }
 
-        public CollectionTree ScrapeOsX()
+        public CollectionTree ScrapeOsX(CollectionTree collectionNodeInstance)
         {
             throw new NotImplementedException();
         }
 
-        public CollectionTree ScrapeFreeBsd()
+        public CollectionTree ScrapeFreeBsd(CollectionTree collectionNodeInstance)
         {
             throw new NotImplementedException();
         }

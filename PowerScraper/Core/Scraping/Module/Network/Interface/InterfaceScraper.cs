@@ -5,7 +5,7 @@ using PowerScraper.Core.Scraping.DataStructure.Collection;
 
 namespace PowerScraper.Core.Scraping.Module.Network.Interface
 {
-    public sealed class InterfaceScraper : AbstractScraper, IScraper
+    public sealed class InterfaceScraper :  IScraper
     {
         public CollectionTree ScrapeWindows(CollectionTree collectionNodeInstance)
         {
@@ -37,17 +37,17 @@ namespace PowerScraper.Core.Scraping.Module.Network.Interface
             return collectionNodeInstance;
         }
 
-        public CollectionTree ScrapeLinux()
+        public CollectionTree ScrapeLinux(CollectionTree collectionNodeInstance)
         {
             throw new NotImplementedException();
         }
 
-        public CollectionTree ScrapeOsX()
+        public CollectionTree ScrapeOsX(CollectionTree collectionNodeInstance)
         {
             throw new NotImplementedException();
         }
 
-        public CollectionTree ScrapeFreeBsd()
+        public CollectionTree ScrapeFreeBsd(CollectionTree collectionNodeInstance)
         {
             throw new NotImplementedException();
         }

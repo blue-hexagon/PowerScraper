@@ -20,9 +20,8 @@ public class DescriptorNode
         return childNode;
     }
 
-    /** Uses DFS to return a subtree of the Node calling this method.
-     * ?The calling Node is returned as well?
-     */
+    /** Uses DFS to return a subtree of the Node calling this method. */
+    // FIX: The calling Node is returned as well
     public List<DescriptorNode> ReturnSubTreeNodes()
     {
         var nodeList = new List<DescriptorNode>();
@@ -42,11 +41,11 @@ public class DescriptorNode
         return nodeList;
     }
 
-    public DescriptorNode FindDescriptor(string descriptorName)
+    public void FindDescriptor(string descriptorName)
     {
         foreach (var item in DescriptorNodeIndex)
             if (item.Key[2..] == descriptorName)
-                return item.Value;
+                return;
 
         throw new KeyNotFoundException();
     }

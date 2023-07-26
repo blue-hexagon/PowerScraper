@@ -5,9 +5,9 @@ namespace PowerScraper.Core.Scraping.DataStructure
     public interface IScraper
     {
         CollectionTree ScrapeWindows(CollectionTree collectionTreeInstance);
-        CollectionTree ScrapeLinux();
-        CollectionTree ScrapeOsX();
-        CollectionTree ScrapeFreeBsd();
+        CollectionTree ScrapeLinux(CollectionTree collectionTreeInstance);
+        CollectionTree ScrapeOsX(CollectionTree collectionTreeInstance);
+        CollectionTree ScrapeFreeBsd(CollectionTree collectionTreeInstance);
     }
     
 

@@ -3,7 +3,7 @@ using PowerScraper.Core.Scraping.DataStructure.Collection;
 
 namespace PowerScraper.Core.Scraping.Module.Hardware.Ram
 {
-    public sealed class RamScraper : AbstractScraper, IScraper
+    public sealed class RamScraper :  IScraper
     {
         public CollectionTree ScrapeWindows(CollectionTree collectionNodeInstance)
         {
@@ -16,17 +16,17 @@ namespace PowerScraper.Core.Scraping.Module.Hardware.Ram
             return collectionNodeInstance;
         }
 
-        public CollectionTree ScrapeLinux()
+        public CollectionTree ScrapeLinux(CollectionTree collectionNodeInstance)
         {
             throw new NotImplementedException();
         }
 
-        public CollectionTree ScrapeOsX()
+        public CollectionTree ScrapeOsX(CollectionTree collectionNodeInstance)
         {
             throw new NotImplementedException();
         }
 
-        public CollectionTree ScrapeFreeBsd()
+        public CollectionTree ScrapeFreeBsd(CollectionTree collectionNodeInstance)
         {
             throw new NotImplementedException();
         }

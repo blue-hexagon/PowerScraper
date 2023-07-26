@@ -5,7 +5,7 @@ public abstract class AbstractDescriptor
     public readonly string Name;
     public readonly string CmdArg;
     public readonly string Description;
-    public IScraper? Scraper; // Null if Descriptor is a category
+    public readonly IScraper? Scraper; // Null if Descriptor is a category/module
 
     protected AbstractDescriptor(string name, string cmdArg, string description, IScraper? scraper)
     {

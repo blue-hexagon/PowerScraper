@@ -1,0 +1,25 @@
+---
+group: CPU
+extraction_implementations:
+  windows:
+    command: 'Get-CimInstance Win32_Processor'
+    vars: null
+    tool: powershell
+  items:
+    - windows:
+        - DeviceID:
+            query: DeviceID
+            name: DeviceID
+            contains_bytes: no
+            cacheable: no
+            resource-path: null
+  group: Clock
+  extraction_implementations:
+    windows:
+      command: '..'
+      vars: '..'
+    items:
+      - abc
+      - def
+      - ghi
+    group: Subgroup

@@ -4,30 +4,44 @@ namespace PowerScraper.Core.Scraping.Module;
 
 public class PropertyGroup
 {
-    private readonly List<PropertyItem> _propertyObjects;
-    public string Command { get; }
-    public string[] Args { get; }
+    public string? MapName { get; }
+    public ExtractionImplementation[] ExtractionImplementations { get; }
 
-    public PropertyGroup(string command, string[] args, PropertyItem[] propertyObjects)
+    public readonly List<PropertyItem>? PropertyItems;
+    public readonly List<PropertyGroup>? PropertyGroups;
+
+    public PropertyGroup(string? mapName, ExtractionImplementation[] extractionImplementations,
+        PropertyItem[]? propertyItems,
+        PropertyGroup[]? propertyGroups)
     {
-        _propertyObjects = propertyObjects.ToList();
-        Command = command;
-        Args = args;
+        MapName = mapName;
+        ExtractionImplementations = extractionImplementations;
+
+        if (propertyItems != null)
+            PropertyItems = propertyItems.ToList();
+        if (propertyGroups != null)
+            PropertyGroups = propertyGroups.ToList();
     }
 
-    public List<string> GetPropertyQueryNamesFromGroup(Platform platform, DataExtractionTool extractionTool)
+    //TODO: Refactor and fix naming
+    public List<string> GetPropertyQueryNamesFromGroup(Platform platform, ExtractionTool extractionTool)
     {
-        return _propertyObjects
-            .Where(propertyObject => propertyObject.OperatingSystem == platform &&
-                                     propertyObject.ExtractionTool == extractionTool)
-            .Select(propertyObject => propertyObject.PropertyQueryName).ToList();
+        // Get all (groupnode) items query fields
+        return PropertyItems!
+            .Where(propertyItem =>
+                propertyItem.OperatingSystem == platform && propertyItem.ExtractionTool == extractionTool)
+            .Select(propertyItem => propertyItem.PropertyQueryName)
+            .ToList();
     }
 
-    public List<PropertyItem> GetPropertiesFromGroup(Platform platform, DataExtractionTool extractionTool)
+    //TODO: Refactor and fix naming
+    public List<PropertyItem> GetPropertiesFromGroup(Platform platform, ExtractionTool extractionTool)
     {
-        return _propertyObjects.Where(propertyObject =>
-                propertyObject.OperatingSystem == platform && propertyObject.ExtractionTool == extractionTool)
-            .Select(p => p)
+        // Get all (groupnode) items
+        return PropertyItems!
+            .Where(propertyItem =>
+                propertyItem.OperatingSystem == platform && propertyItem.ExtractionTool == extractionTool)
+            .Select(propertyItem => propertyItem)
             .ToList();
     }
 }

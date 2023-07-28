@@ -27,10 +27,11 @@ public class CollectionTree : IYamlConvertible
         ModuleName = moduleName;
     }
 
-    public void InsertModule(CollectionTree node)
+    public CollectionTree InsertModule(CollectionTree node)
     {
         Nodes.Add(node);
         node.ParentNode = this;
+        return node;
     }
 
     public void AddItem(string key, string value)

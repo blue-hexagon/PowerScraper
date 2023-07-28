@@ -13,7 +13,6 @@ namespace PowerScraper.Core.Scraping.Module.System.Computer
                 CurrentTimeZone,AdminPasswordStatus,HypervisorPresent,InfraredSupported,
                 Manufacturer,Model,Name,PartOfDomain,PrimaryOwnerName,SystemFamily,SystemSKUNumber,SystemType,
                 TotalPhysicalMemory,UserName");
-            TransientShell.ParsePsObjectsAndAddItemsToNode(psObjects, null, collectionNodeInstance);
             return collectionNodeInstance;
         }
 

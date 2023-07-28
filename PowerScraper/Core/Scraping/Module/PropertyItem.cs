@@ -8,11 +8,11 @@ public class PropertyItem
     public readonly string PropertyQueryName;
     public readonly bool ValueContainsBytes;
     public readonly bool Cacheable;
-    public readonly DataExtractionTool ExtractionTool;
+    public readonly ExtractionTool ExtractionTool;
     public readonly string? ResourcePath;
 
     public PropertyItem(Platform operatingSystem, string propertyDisplayName, string propertyQueryName,
-        bool valueContainsBytes, bool cacheable, DataExtractionTool extractionTool, string? resourcePath)
+        bool valueContainsBytes, bool cacheable, ExtractionTool extractionTool, string? resourcePath)
     {
         OperatingSystem = operatingSystem;
         PropertyDisplayName = propertyDisplayName;

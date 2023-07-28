@@ -10,7 +10,6 @@ namespace PowerScraper.Core.Scraping.Module.Hardware.Harddrive
             collectionNodeInstance.ModuleName = "Harddrive";
             var psObjects = TransientShell.InvokeRawScript(@"
                 Get-CimInstance Win32_LogicalDisk | Select-Object DeviceID, DriveType, ProviderName, VolumeName, Size, FreeSpace");
-            TransientShell.ParsePsObjectsAndAddItemsToNode(psObjects, null, collectionNodeInstance);
 
             return collectionNodeInstance;
         }

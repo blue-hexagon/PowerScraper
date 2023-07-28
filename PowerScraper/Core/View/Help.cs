@@ -17,10 +17,10 @@ namespace PowerScraper.Core.View
             nameLen += 2;
             cmdLen += 2;
 
-            foreach (var node in TreeAccessor.RootDescriptorNode.ReturnSubTreeNodes())
+            foreach (var descriptor in TreeAccessor.RootDescriptorNode.ReturnSubTreeNodes().Select(node => node.Descriptor).Reverse())
             {
-                var descriptor = node.Descriptor;
-
+                if (descriptor.Scraper == null && descriptor.CmdArg != "--all")
+                    Console.WriteLine();
                 Console.ForegroundColor = descriptor.Scraper == null ? ConsoleColor.Green : ConsoleColor.White;
                 Console.WriteLine(
                     $"{descriptor.Name.PadRight(nameLen)} {descriptor.CmdArg.PadRight(cmdLen)} {descriptor.Description}");

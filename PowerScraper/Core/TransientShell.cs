@@ -34,29 +34,49 @@ public static class TransientShell
         return content;
     }
 
-    public static void RunPowershellExtraction(PropertyGroup moduleProperties, CollectionTree collectionNodeInstance,
-        Utility.OS.Platform platform)
+    public static void RunPowershellExtraction(
+        PropertyGroup propertyTree,
+        CollectionTree collectionNodeInstance,
+        Utility.OS.Platform platform,
+        string? mapName,
+        int level = 0
+    )
     {
-        ParsePsObjectsAndAddItemsToNode(
-            InvokeRawScript(@$"
-                {moduleProperties.Command} {string.Join(" ", moduleProperties.Args)} | Select-Object {string.Join(", ", moduleProperties.GetPropertyQueryNamesFromGroup(platform, DataExtractionTool.PowerShell))}"
-            ),
-            moduleProperties.GetPropertiesFromGroup(platform, DataExtractionTool.PowerShell),
-            collectionNodeInstance
-        );
+        var moduleGroups = propertyTree.PropertyGroups;
+        var moduleItems = propertyTree.PropertyItems;
+
+        var extractionImplementation = propertyTree.ExtractionImplementations
+            .First(implementation => implementation.Os == platform);
+
+        var propertyItemsQueryFields = propertyTree.GetPropertyQueryNamesFromGroup(platform, ExtractionTool.PowerShell);
+        var joinedFields = string.Join(", ", propertyItemsQueryFields);
+
+        var psObjects = InvokeRawScript(@$"{extractionImplementation.Command} | Select-Object {joinedFields}");
+        var groupPropertyItems = propertyTree.GetPropertiesFromGroup(platform, ExtractionTool.PowerShell);
+        if (mapName != null)
+            collectionNodeInstance = collectionNodeInstance.InsertModule(new CollectionTree(mapName));
+        ParsePsObjectsAndAddItemsToNode(psObjects, groupPropertyItems, collectionNodeInstance);
+
+        if (moduleGroups != null)
+        {
+            foreach (var group in moduleGroups)
+            {
+                RunPowershellExtraction(group, collectionNodeInstance, platform, group.MapName,level + 1);
+            }
+        }
     }
 
     // TODO: Refactor naming
-    public static void ParsePsObjectsAndAddItemsToNode(Collection<PSObject> psObjects,
-        List<PropertyItem> propertyObjects, CollectionTree collectionNodeInstance)
+    public static void ParsePsObjectsAndAddItemsToNode(
+        Collection<PSObject> psObjects,
+        List<PropertyItem> propertyObjects,
+        CollectionTree collectionNodeInstance)
     {
         foreach (var member in psObjects)
         {
             if (member.Properties.Count() != propertyObjects.Count)
-            {
                 throw new Exception(
                     "The number of properties in the PSObject should be equal to the number of propertyObjects");
-            }
 
             var zipGroup =
                 member.Properties.Zip(propertyObjects, (psProp, propObj) => new { Ps = psProp, Obj = propObj });
@@ -76,8 +96,9 @@ public static class TransientShell
                     catch (Exception e)
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine(
-                            "A scraper-file (*Scraper.cs) has a wrong boolean value for the field ValueContainsBytes on a PropertyObject which caused the program to try to convert a string to an Int64.");
+                        Console.WriteLine("A scraper-file (*Scraper.cs) has a wrong boolean value for the field " +
+                                          "ValueContainsBytes on a PropertyObject which caused the program to try to " +
+                                          "convert a string to an Int64.");
                         Console.ForegroundColor = ConsoleColor.White;
                         Console.WriteLine(e);
                         Environment.Exit(ExitStatus.Error);

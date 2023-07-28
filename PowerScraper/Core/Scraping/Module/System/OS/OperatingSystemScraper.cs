@@ -15,7 +15,6 @@ namespace PowerScraper.Core.Scraping.Module.System.OS
                 InstallDate,LastBootUpTime,LocalDateTime,Locale,NumberOfProcesses,NumberOfUsers,Organization,
                 OSLanguage,SizeStoredInPagingFiles,SystemDrive,WindowsDirectory");
 
-            TransientShell.ParsePsObjectsAndAddItemsToNode(psObjects, null,collectionNodeInstance);
             return collectionNodeInstance;
         }
 

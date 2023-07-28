@@ -12,10 +12,10 @@ namespace PowerScraper.Core
 
         public Runner(
             UnitConversion.Bases unitBase = UnitConversion.Bases.Base2,
-            SerializationFormat serializer = SerializationFormat.Json)
+            SerializationFormat serializer = SerializationFormat.Json,
+            LogLevel logLevel = LogLevel.Warning)
         {
-            Trace.Listeners.Add(new TextWriterTraceListener("errors.log"));
-            Trace.AutoFlush = true;
+            Logger.LoggingLevel = logLevel;
 
             /* Critical program initialization */
             TreeAccessor.MakeTree();
@@ -30,28 +30,31 @@ namespace PowerScraper.Core
 
         public void Execute(string[] args)
         {
-            IfNoArgs(args);
-            IfHelpArg(args);
+            // IfNoArgs(args);
+            if (IfHelpArg(args))
+                return;
             IfBadArg(args);
             var collectorDescriptors = ArgParser.ParseCommandLineArguments(args);
             var serializedOutput = AppView.Serialize(_serializer, collectorDescriptors);
             AppView.Display(serializedOutput);
-            Environment.Exit(ExitStatus.Success);
+            // Environment.Exit(ExitStatus.Success);
         }
 
-        private static void IfHelpArg(IReadOnlyList<string> args)
+        private static bool IfHelpArg(IReadOnlyList<string> args)
         {
-            if (args.Count != 0 && (args[0] != "--help" || args.Count != 1)) return;
+            if (args.Count != 0 && (args[0] != "--help" || args.Count != 1))
+                return false;
             HelpView.VerboseDisplay();
-            Environment.Exit(ExitStatus.Success);
+            return true;
+            // Environment.Exit(ExitStatus.Success);
         }
 
-        private static void IfNoArgs(IReadOnlyCollection<string> args)
-        {
-            if (args.Count != 0) return;
-            HelpView.VerboseDisplay();
-            Environment.Exit(ExitStatus.Success);
-        }
+        // private static void IfNoArgs(IReadOnlyCollection<string> args)
+        // {
+        // if (args.Count != 0) return;
+        // HelpView.VerboseDisplay();
+        // Environment.Exit(ExitStatus.Success);
+        // }
 
         private static void IfBadArg(IEnumerable<string> args)
         {

@@ -5,6 +5,7 @@ using Microsoft.PowerShell.Commands;
 using PowerScraper.Core.Scraping.DataStructure.Collection;
 using PowerScraper.Core.Scraping.Module;
 using PowerScraper.Core.Utility;
+using Platform = PowerScraper.Core.Utility.OS.Platform;
 
 namespace PowerScraper.Core;
 
@@ -27,6 +28,12 @@ public static class TransientShell
         _ps.Runspace = _rs;
     }
 
+    public static void CloseRunspace()
+    {
+        _rs!.Close();
+        _ps!.Dispose();
+    }
+
     public static Collection<PSObject> InvokeRawScript(string command)
     {
         _ps!.AddScript(command);
@@ -37,37 +44,42 @@ public static class TransientShell
     public static void RunPowershellExtraction(
         PropertyGroup propertyTree,
         CollectionTree collectionNodeInstance,
-        Utility.OS.Platform platform,
-        string? mapName,
-        int level = 0
-    )
+        Platform platform,
+        string? mapName)
     {
-        var moduleGroups = propertyTree.PropertyGroups;
-        var moduleItems = propertyTree.PropertyItems;
-
-        var extractionImplementation = propertyTree.ExtractionImplementations
-            .First(implementation => implementation.Os == platform);
-
-        var propertyItemsQueryFields = propertyTree.GetPropertyQueryNamesFromGroup(platform, ExtractionTool.PowerShell);
-        var joinedFields = string.Join(", ", propertyItemsQueryFields);
-
-        var psObjects = InvokeRawScript(@$"{extractionImplementation.Command} | Select-Object {joinedFields}");
-        var groupPropertyItems = propertyTree.GetPropertiesFromGroup(platform, ExtractionTool.PowerShell);
         if (mapName != null)
             collectionNodeInstance = collectionNodeInstance.InsertModule(new CollectionTree(mapName));
-        ParsePsObjectsAndAddItemsToNode(psObjects, groupPropertyItems, collectionNodeInstance);
 
-        if (moduleGroups != null)
+        var psCommand = GetPsCommand(propertyTree, platform);
+        var psObjects = InvokeRawScript(psCommand);
+
+        var groups = propertyTree.PropertyGroups;
+        var groupItems = propertyTree.GetItems(platform, ExtractionTool.PowerShell);
+
+        ParsePsObjectsAndAddItemsToNode(psObjects, groupItems, collectionNodeInstance);
+
+        if (groups == null) return;
+        foreach (var group in groups)
         {
-            foreach (var group in moduleGroups)
-            {
-                RunPowershellExtraction(group, collectionNodeInstance, platform, group.MapName,level + 1);
-            }
+            RunPowershellExtraction(group, collectionNodeInstance, platform, group.MapName);
         }
     }
 
+    private static string GetPsCommand(PropertyGroup propertyTree, Platform platform)
+    {
+        var extractionImplementation = propertyTree.ExtractionImplementations
+            .First(implementation => implementation.Os == platform);
+
+        var propertyItemsQueryFields = propertyTree.GetItemQueryNames(platform, ExtractionTool.PowerShell);
+        var joinedFields = string.Join(", ", propertyItemsQueryFields);
+
+        var psCommand = @$"{extractionImplementation.Command} | Select-Object {joinedFields}";
+        Logger.ToConsole(LogLevel.Info, psCommand);
+        return psCommand;
+    }
+
     // TODO: Refactor naming
-    public static void ParsePsObjectsAndAddItemsToNode(
+    private static void ParsePsObjectsAndAddItemsToNode(
         Collection<PSObject> psObjects,
         List<PropertyItem> propertyObjects,
         CollectionTree collectionNodeInstance)
@@ -75,11 +87,10 @@ public static class TransientShell
         foreach (var member in psObjects)
         {
             if (member.Properties.Count() != propertyObjects.Count)
-                throw new Exception(
-                    "The number of properties in the PSObject should be equal to the number of propertyObjects");
+                throw new Exception("The number of properties in the PSObject should be equal to the number of propertyObjects");
 
-            var zipGroup =
-                member.Properties.Zip(propertyObjects, (psProp, propObj) => new { Ps = psProp, Obj = propObj });
+            var zipGroup = member.Properties
+                .Zip(propertyObjects, (psProp, propObj) => new { Ps = psProp, Obj = propObj });
 
             foreach (var item in zipGroup)
             {
@@ -111,11 +122,5 @@ public static class TransientShell
                 }
             }
         }
-    }
-
-    public static void CloseRunspace()
-    {
-        _rs!.Close();
-        _ps!.Dispose();
     }
 }

@@ -1,17 +1,5 @@
-﻿using System.Text.Json;
-using Newtonsoft.Json;
-using Pastel;
-using PowerScraper.Core;
+﻿using PowerScraper.Core;
 using PowerScraper.Core.Utility;
-using PowerScraper.Core.Scraping.DataStructure;
-using PowerScraper.Core.Serializers;
-using YamlDotNet.Serialization;
-using YamlDotNet.Serialization.NamingConventions;
-using JsonSerializer = Newtonsoft.Json.JsonSerializer;
-using System.Diagnostics;
-using System.Text.Json;
-using PowerScraper.Core.Scraping.Module.Hardware.Cpu;
-using PowerScraper.Core.Scraping.Module.System.Computer;
 
 namespace PowerScraper
 {
@@ -19,22 +7,31 @@ namespace PowerScraper
     {
         public static void Main(string[] args)
         {
-            new Runner(UnitConversion.Bases.Base10, SerializationFormat.Yaml).Execute(args);
-            
-            //var runner = new Runner(serializer: SerializationFormat.Json);
-            //runner.Execute(args: args);
+            if (args.Length == 0)
+            {
+                while (true)
+                {
+                    Console.Write("Enter arguments (empty to exit): ");
+                    var argsInput = Console.ReadLine()?.Split(" ");
+                    if (argsInput == null || argsInput.First() == "")
+                        Environment.Exit(ExitStatus.Success);
+                    Console.Write(argsInput.First());
 
+                    new Runner(
+                        UnitConversion.Bases.Base10,
+                        SerializationFormat.Yaml,
+                        LogLevel.Debug
+                    ).Execute(argsInput);
+                }
+            }
 
-            //
-            //TestProgram.TestEnumerator();
-            //TestProgram.TestYamlSerializer();
-            //TestProgram.TestRootTraverser();
+            new Runner(
+                UnitConversion.Bases.Base10,
+                SerializationFormat.Yaml,
+                LogLevel.Debug
+            ).Execute(args);
 
-            //Environment.Exit(0);
-
-            //TestProgram.TestJsonSerializer();
-
-            // var collectors = new List<DescriptorNode> { new CpuDescriptor(), new ComputerDescriptor() };
+            Environment.Exit(ExitStatus.Success);
         }
     }
 }

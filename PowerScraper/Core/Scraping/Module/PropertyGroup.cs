@@ -24,7 +24,7 @@ public class PropertyGroup
     }
 
     //TODO: Refactor and fix naming
-    public List<string> GetPropertyQueryNamesFromGroup(Platform platform, ExtractionTool extractionTool)
+    public List<string> GetItemQueryNames(Platform platform, ExtractionTool extractionTool)
     {
         // Get all (groupnode) items query fields
         return PropertyItems!
@@ -35,7 +35,7 @@ public class PropertyGroup
     }
 
     //TODO: Refactor and fix naming
-    public List<PropertyItem> GetPropertiesFromGroup(Platform platform, ExtractionTool extractionTool)
+    public List<PropertyItem> GetItems(Platform platform, ExtractionTool extractionTool)
     {
         // Get all (groupnode) items
         return PropertyItems!

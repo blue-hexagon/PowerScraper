@@ -1,0 +1,36 @@
+version: '3'
+
+services:
+  postgres:
+    build:
+      context: .
+      dockerfile: postgres.Dockerfile
+    image: icybadger/powerscraper-postgres:1.0.0
+    volumes:
+      - pg_db:/var/lib/postgresql/data:rw
+    networks:
+      - private_net
+    ports:
+      - '5432:5432'
+    environment:
+      - PGPASSWORD=Kode1234!
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=Kode1234!
+
+  app:
+    build:
+      context: .
+      dockerfile: app.Dockerfile
+    image: icybadger/powerscraper-app:1.0.0
+    networks:
+      - private_net
+    ports:
+      - '6538:6538'
+
+networks:
+  private_net:
+    driver: bridge
+
+volumes:
+  pg_db:
+    driver: local

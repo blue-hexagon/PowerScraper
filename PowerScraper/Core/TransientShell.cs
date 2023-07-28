@@ -11,8 +11,9 @@ namespace PowerScraper.Core;
 
 public static class TransientShell
 {
-    private static PowerShell? _ps;
-    private static Runspace? _rs;
+    private static List<PowerShell>? PowerShells { get; set; }
+    private static List<Runspace>? Runspaces { get; set; }
+    private static int _currentPowerShellIndex;
 
     public static void InitializeRunspace()
     {
@@ -20,24 +21,48 @@ public static class TransientShell
         iss.Commands.Add(new SessionStateCmdletEntry("Select-Object", typeof(SelectObjectCommand), null));
         iss.ImportPSModule("CimCmdlets");
         iss.LanguageMode = PSLanguageMode.FullLanguage;
-        _rs = RunspaceFactory.CreateRunspace(iss);
-        _rs.Open();
 
-        _ps = PowerShell.Create();
+        Runspaces = new List<Runspace>();
+        PowerShells = new List<PowerShell>();
 
-        _ps.Runspace = _rs;
+        for (var i = 0; i < ThreadingOptions.GetCoreCount(); i++)
+        {
+            var rs = RunspaceFactory.CreateRunspace(iss);
+            rs.Open();
+            Runspaces.Add(rs);
+
+            var ps = PowerShell.Create();
+            ps.Runspace = rs;
+            PowerShells.Add(ps);
+            // @formatter:off
+            Logger.ToConsole(LogLevel.Debug, $"Created PowerShell with initialized runspace {i + 1}/{ThreadingOptions.GetCoreCount()}.");
+            // @formatter:on
+        }
     }
 
     public static void CloseRunspace()
     {
-        _rs!.Close();
-        _ps!.Dispose();
+        foreach (var ps in PowerShells!)
+        {
+            ps.Dispose();
+        }
+
+        foreach (var rs in Runspaces!)
+        {
+            rs.Close();
+            rs.Dispose();
+        }
     }
 
     public static Collection<PSObject> InvokeRawScript(string command)
     {
-        _ps!.AddScript(command);
-        var content = _ps.Invoke();
+        var index = Interlocked.Increment(ref _currentPowerShellIndex) % PowerShells!.Count;
+        var ps = PowerShells[index];
+
+        ps.Commands.Clear();
+        ps.AddScript(command);
+        var content = ps.Invoke();
+
         return content;
     }
 
@@ -53,8 +78,9 @@ public static class TransientShell
         var psCommand = GetPsCommand(propertyTree, platform);
         var psObjects = InvokeRawScript(psCommand);
 
-        var groups = propertyTree.PropertyGroups;
-        var groupItems = propertyTree.GetItems(platform, ExtractionTool.PowerShell);
+        var (groups, groupItems) = (propertyTree.PropertyGroups,
+            propertyTree.GetItems(platform, ExtractionTool.PowerShell));
+
 
         ParsePsObjectsAndAddItemsToNode(psObjects, groupItems, collectionNodeInstance);
 
@@ -87,7 +113,8 @@ public static class TransientShell
         foreach (var member in psObjects)
         {
             if (member.Properties.Count() != propertyObjects.Count)
-                throw new Exception("The number of properties in the PSObject should be equal to the number of propertyObjects");
+                throw new Exception(
+                    "The number of properties in the PSObject should be equal to the number of propertyObjects");
 
             var zipGroup = member.Properties
                 .Zip(propertyObjects, (psProp, propObj) => new { Ps = psProp, Obj = propObj });

@@ -10,6 +10,7 @@ namespace PowerScraper.Core
 
             foreach (var arg in arguments)
             {
+                Logger.ToConsole(LogLevel.Debug, $"Parsing args, current is: {arg}");
                 if (!DescriptorNode.DescriptorNodeIndex.ContainsKey(arg))
                     continue;
                 if (DescriptorNode.DescriptorNodeIndex[arg].Descriptor.Scraper != null)
@@ -23,14 +24,12 @@ namespace PowerScraper.Core
                 }
             }
 
-            if (false) // debug
+            for (var i = 0; i < collectors.Count; i++)
             {
-                Console.WriteLine("Collector Count:" + collectors.Count);
-                for (int i = 0; i < collectors.Count; i++)
-                {
-                    Console.WriteLine($"Collector {i}: " + collectors.ToArray()[i].Name +
-                                      $"\nIs Category or Scraper? {collectors.ToArray()[i].Scraper}");
-                }
+                Logger.ToConsole(
+                    LogLevel.Debug,
+                    $"Collector {i + 1}/{collectors.Count}: {collectors.ToArray()[i].Name}"
+                );
             }
 
             /* Duplicates may exists in collectors list, therefore remove them by

@@ -42,8 +42,9 @@ public static class TreeAccessor // Change to: DescriptorTreeAccessor?
             var system = RootDescriptorNode.Insert(new SystemDescriptor());
                 system.Insert(new ComputerDescriptor());
                 system.Insert(new OperatingSystemDescriptor());
-            var uncategorized = RootDescriptorNode.Insert(new UncategorizedDescriptor());
+            // var uncategorized = RootDescriptorNode.Insert(new UncategorizedDescriptor());
             IndexTree(RootDescriptorNode);
+            Logger.ToConsole(LogLevel.Debug, $"Created RootDescriptorNode, added modules and indexed the tree.");
     }
 
     private static void IndexTree(DescriptorNode rootDescriptorNode)

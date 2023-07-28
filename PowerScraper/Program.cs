@@ -1,5 +1,6 @@
 ﻿using PowerScraper.Core;
 using PowerScraper.Core.Utility;
+using System.Data.Sql;
 
 namespace PowerScraper
 {
@@ -9,29 +10,24 @@ namespace PowerScraper
         {
             if (args.Length == 0)
             {
-                while (true)
-                {
-                    Console.Write("Enter arguments (empty to exit): ");
-                    var argsInput = Console.ReadLine()?.Split(" ");
-                    if (argsInput == null || argsInput.First() == "")
-                        Environment.Exit(ExitStatus.Success);
-                    Console.Write(argsInput.First());
-
-                    new Runner(
-                        UnitConversion.Bases.Base10,
-                        SerializationFormat.Yaml,
-                        LogLevel.Debug
-                    ).Execute(argsInput);
-                }
+                new Runner(
+                    UnitConversion.Bases.Base10,
+                    SerializationFormat.Yaml,
+                    CoreUtilisation.Medium,
+                    LogLevel.Debug
+                ).ExecuteInteractively();
             }
+            else if (args.Length > 0)
+            {
+                new Runner(
+                    UnitConversion.Bases.Base10,
+                    SerializationFormat.Yaml,
+                    CoreUtilisation.Medium,
+                    LogLevel.Debug
+                ).Execute(args);
 
-            new Runner(
-                UnitConversion.Bases.Base10,
-                SerializationFormat.Yaml,
-                LogLevel.Debug
-            ).Execute(args);
-
-            Environment.Exit(ExitStatus.Success);
+                Environment.Exit(ExitStatus.Success);
+            }
         }
     }
 }

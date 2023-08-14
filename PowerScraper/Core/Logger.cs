@@ -21,24 +21,15 @@ public static class Logger
         {
             lock (_consoleLock)
             {
-                switch (logLevel)
+                Console.ForegroundColor = logLevel switch
                 {
-                    case LogLevel.Debug:
-                        Console.ForegroundColor = ConsoleColor.Gray;
-                        break;
-                    case LogLevel.Info:
-                        Console.ForegroundColor = ConsoleColor.Green;
-                        break;
-                    case LogLevel.Warning:
-                        Console.ForegroundColor = ConsoleColor.Yellow;
-                        break;
-                    case LogLevel.Error:
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        break;
-                    case LogLevel.Critical:
-                        Console.ForegroundColor = ConsoleColor.DarkRed;
-                        break;
-                }
+                    LogLevel.Debug => ConsoleColor.Gray,
+                    LogLevel.Info => ConsoleColor.Green,
+                    LogLevel.Warning => ConsoleColor.Yellow,
+                    LogLevel.Error => ConsoleColor.Red,
+                    LogLevel.Critical => ConsoleColor.DarkRed,
+                    _ => Console.ForegroundColor
+                };
 
                 Console.WriteLine($"[{new DateTimeOffset(DateTime.UtcNow).ToLocalTime()} - {logLevel.ToString()}]: " + message);
                 Console.ForegroundColor = ConsoleColor.Gray;

@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using System.Text.RegularExpressions;
+﻿using PowerScraper.Core.ExtractionTooling.Powershell;
 using PowerScraper.Core.Scraping.DataStructure;
 using PowerScraper.Core.Utility;
 using PowerScraper.Core.Utility.OS;
@@ -26,7 +25,7 @@ namespace PowerScraper.Core
             /* Critical program initialization */
             TreeAccessor.MakeTree();
             ThreadingOptions.SetCores(coreUtilisation);
-            TransientShell.InitializeRunspace();
+            ShellInstance.InitializeRunspace();
             PlatformReader.PlatformInUse = PlatformReader.IdentifyPlatform();
             UnitConversion.BaseUsed = unitBase;
             _serializer = serializer;
@@ -35,6 +34,7 @@ namespace PowerScraper.Core
         // TODO: Refactor Execute and ExecuteInteractively
         public void Execute(string[] args)
         {
+            Logger.ToConsole(LogLevel.Info, "Entered regular execution mode");
             if (IfHelpArg(args))
                 return;
             if (IfBadArg(args).Count > 0)
@@ -43,24 +43,33 @@ namespace PowerScraper.Core
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine($"Received one or more bad argument(s): {allBadArgs}");
                 Console.ForegroundColor = ConsoleColor.White;
+                ShellInstance.CloseRunspace();
                 Environment.Exit(ExitStatus.BadArgument);
+                
             }
 
             var collectorDescriptors = ArgParser.ParseCommandLineArguments(args);
             var serializedOutput = AppView.Serialize(_serializer, collectorDescriptors);
             AppView.Display(serializedOutput);
+            ShellInstance.CloseRunspace();
         }
 
         // TODO: Refactor Execute and ExecuteInteractively
         // ReSharper disable once FunctionNeverReturns
         public void ExecuteInteractively()
         {
+            Logger.ToConsole(LogLevel.Info, "Entered interactive execution mode");
             while (true)
             {
-                Console.Write("Enter arguments (empty to exit): ");
+                Console.WriteLine("Enter arguments (empty to exit): ");
                 var argsInput = Console.ReadLine()?.Split(" ");
+                
                 if (argsInput == null || argsInput.First() == "" || argsInput.First().ToLower() == "exit")
+                {
+                    ShellInstance.CloseRunspace();
                     Environment.Exit(ExitStatus.Success);
+                }
+
                 if (IfHelpArg(argsInput))
                     continue;
                 if (IfBadArg(argsInput).Count > 0)

@@ -1,4 +1,5 @@
-﻿using PowerScraper.Core.Scraping.DataStructure;
+﻿using PowerScraper.Core.ExtractionTooling.Powershell;
+using PowerScraper.Core.Scraping.DataStructure;
 using PowerScraper.Core.Scraping.DataStructure.Collection;
 
 namespace PowerScraper.Core.Scraping.Module.System.Computer
@@ -8,11 +9,11 @@ namespace PowerScraper.Core.Scraping.Module.System.Computer
         public CollectionTree ScrapeWindows(CollectionTree collectionNodeInstance)
         {
             collectionNodeInstance.ModuleName = "Computer";
-            var psObjects = TransientShell.InvokeRawScript(@"
-                Get-CimInstance Win32_ComputerSystem | Select-Object DNSHostName,Domain,DomainRole,DaylightInEffect,
-                CurrentTimeZone,AdminPasswordStatus,HypervisorPresent,InfraredSupported,
-                Manufacturer,Model,Name,PartOfDomain,PrimaryOwnerName,SystemFamily,SystemSKUNumber,SystemType,
-                TotalPhysicalMemory,UserName");
+            // var psObjects = ShellInstance.InvokePsScript(@"
+            //     Get-CimInstance Win32_ComputerSystem | Select-Object DNSHostName,Domain,DomainRole,DaylightInEffect,
+            //     CurrentTimeZone,AdminPasswordStatus,HypervisorPresent,InfraredSupported,
+            //     Manufacturer,Model,Name,PartOfDomain,PrimaryOwnerName,SystemFamily,SystemSKUNumber,SystemType,
+            //     TotalPhysicalMemory,UserName");
             return collectionNodeInstance;
         }
 

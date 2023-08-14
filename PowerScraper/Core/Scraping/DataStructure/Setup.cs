@@ -16,15 +16,12 @@ using PowerScraper.Core.Scraping.Module.System.Computer;
 using PowerScraper.Core.Scraping.Module.System.OS;
 using PowerScraper.Core.Scraping.Module.Uncategorized;
 
-// ReSharper disable UnusedVariable
 // @formatter:off
 namespace PowerScraper.Core.Scraping.DataStructure;
 
-public static class TreeAccessor // Change to: DescriptorTreeAccessor?
+public static class TreeAccessor
 {
     public static DescriptorNode RootDescriptorNode { get; } = new(new AllDescriptor());
-    
-    
     public static void MakeTree()
     {
             var hardware = RootDescriptorNode.Insert(new HardwareDescriptor());

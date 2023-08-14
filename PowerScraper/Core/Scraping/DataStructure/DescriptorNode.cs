@@ -4,7 +4,6 @@ public class DescriptorNode
 {
     private DescriptorNode? ParentNode { get; init; }
     private List<DescriptorNode> ChildNodes { get; set; } = new();
-    private readonly Dictionary<DescriptorNode, List<DescriptorNode>> _subTree = new();
     public readonly AbstractDescriptor Descriptor;
     public static readonly Dictionary<string, DescriptorNode> DescriptorNodeIndex = new();
 

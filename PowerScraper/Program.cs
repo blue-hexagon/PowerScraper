@@ -1,6 +1,8 @@
 ﻿using PowerScraper.Core;
 using PowerScraper.Core.Utility;
 using System.Data.Sql;
+using PowerScraper.Core.Utility.OS;
+using PowerScraper.Tonsil;
 
 namespace PowerScraper
 {
@@ -8,12 +10,14 @@ namespace PowerScraper
     {
         public static void Main(string[] args)
         {
+            // LexerTester.Test();
+            // ExitMessage.Write("Success");
             if (args.Length == 0)
             {
                 new Runner(
                     UnitConversion.Bases.Base10,
                     SerializationFormat.Yaml,
-                    CoreUtilisation.Medium,
+                    CoreUtilisation.Max,
                     LogLevel.Debug
                 ).ExecuteInteractively();
             }
@@ -22,7 +26,7 @@ namespace PowerScraper
                 new Runner(
                     UnitConversion.Bases.Base10,
                     SerializationFormat.Yaml,
-                    CoreUtilisation.Medium,
+                    CoreUtilisation.Max,
                     LogLevel.Debug
                 ).Execute(args);
 

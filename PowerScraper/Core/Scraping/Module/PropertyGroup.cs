@@ -8,19 +8,20 @@ public class PropertyGroup
     public ExtractionImplementation[] ExtractionImplementations { get; }
 
     public readonly List<PropertyItem>? PropertyItems;
+    public readonly PropertyItemSequence? PropertyItemSequence;
     public readonly List<PropertyGroup>? PropertyGroups;
 
     public PropertyGroup(string? mapName, ExtractionImplementation[] extractionImplementations,
-        PropertyItem[]? propertyItems,
-        PropertyGroup[]? propertyGroups)
+        List<PropertyItem>? propertyItems,
+        PropertyItemSequence? propertyItemSequence,
+        List<PropertyGroup>? propertyGroups)
     {
         MapName = mapName;
         ExtractionImplementations = extractionImplementations;
 
-        if (propertyItems != null)
-            PropertyItems = propertyItems.ToList();
-        if (propertyGroups != null)
-            PropertyGroups = propertyGroups.ToList();
+        PropertyItems = propertyItems;
+        PropertyItemSequence = propertyItemSequence;
+        PropertyGroups = propertyGroups;
     }
 
     //TODO: Refactor and fix naming

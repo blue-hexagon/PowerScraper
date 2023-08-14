@@ -15,11 +15,13 @@ public class CollectionTree : IYamlConvertible
     public List<CollectionTree> Nodes { get; set; } = new();
 
     public List<Item> Items { get; set; } = new();
+    public List<Item> ItemSequence { get; set; } = new();
 
 
     public CollectionTree()
     {
-        ModuleName = "Module name was not set! - Set it in the first line of the Scraper Logic";
+        // Set it in the first line of the Scraper Logic
+        ModuleName = "";
     }
 
     public CollectionTree(string moduleName)
@@ -71,6 +73,22 @@ public class CollectionTree : IYamlConvertible
             }
         }
 
+        if (ItemSequence.Count > 0)
+        {
+            emitter.Emit(new Scalar(null, "Drives"));
+            emitter.Emit(new SequenceStart(null, null, false, SequenceStyle.Block));
+            // var firstKey = ItemSequences.First().Key;
+            emitter.Emit(new MappingStart(null, null, false, MappingStyle.Block));
+            foreach (var items in ItemSequence)
+            {
+                emitter.Emit(new Scalar(null, items.Key));
+                emitter.Emit(new Scalar(null, items.Value));
+            }
+
+            emitter.Emit(new MappingEnd());
+            emitter.Emit(new SequenceEnd());
+        }
+
         if (Nodes.Count > 0)
         {
             foreach (var node in Nodes)
@@ -88,54 +106,54 @@ public class CollectionTree : IYamlConvertible
     }
 
     //TODO: Reconsider if this has any use cases or should be deleted
-    public void TraverseCollection()
-    {
-        InnerFunction(this);
-
-        void InnerFunction(CollectionTree node)
-        {
-            Console.WriteLine(node.ModuleName);
-            foreach (var child in node.Nodes)
-            {
-                if (child.Nodes.Count != 0)
-                {
-                    InnerFunction(child);
-                }
-                else
-                {
-                    Console.WriteLine(child.ModuleName);
-                    foreach (var item in child.Items)
-                    {
-                        Console.WriteLine(item.Key + " : " + item.Value);
-                    }
-                }
-            }
-
-            foreach (var item in node.Items)
-            {
-                Console.WriteLine(item.Key + " : " + item.Value);
-            }
-        }
-    }
+    // public void TraverseCollection()
+    // {
+    //     InnerFunction(this);
+    //
+    //     void InnerFunction(CollectionTree node)
+    //     {
+    //         Console.WriteLine(node.ModuleName);
+    //         foreach (var child in node.Nodes)
+    //         {
+    //             if (child.Nodes.Count != 0)
+    //             {
+    //                 InnerFunction(child);
+    //             }
+    //             else
+    //             {
+    //                 Console.WriteLine(child.ModuleName);
+    //                 foreach (var item in child.Items)
+    //                 {
+    //                     Console.WriteLine(item.Key + " : " + item.Value);
+    //                 }
+    //             }
+    //         }
+    //
+    //         foreach (var item in node.Items)
+    //         {
+    //             Console.WriteLine(item.Key + " : " + item.Value);
+    //         }
+    //     }
+    // }
 
     //TODO: Reconsider if this has any use cases or should be deleted
-    public static List<CollectionTree> DfsList(CollectionTree root)
-    {
-        var dfsList = new List<CollectionTree>();
-        InnerFunction(root);
-
-        void InnerFunction(CollectionTree node)
-        {
-            dfsList.Add(node);
-            foreach (var child in node.Nodes)
-            {
-                if (child.Nodes.Count != 0)
-                    InnerFunction(child);
-                else
-                    dfsList.Add(child);
-            }
-        }
-
-        return dfsList;
-    }
+    // public static List<CollectionTree> DfsList(CollectionTree root)
+    // {
+    //     var dfsList = new List<CollectionTree>();
+    //     InnerFunction(root);
+    //
+    //     void InnerFunction(CollectionTree node)
+    //     {
+    //         dfsList.Add(node);
+    //         foreach (var child in node.Nodes)
+    //         {
+    //             if (child.Nodes.Count != 0)
+    //                 InnerFunction(child);
+    //             else
+    //                 dfsList.Add(child);
+    //         }
+    //     }
+    //
+    //     return dfsList;
+    // }
 }

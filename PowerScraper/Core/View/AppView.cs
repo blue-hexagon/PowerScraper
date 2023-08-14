@@ -10,7 +10,6 @@ namespace PowerScraper.Core.View
         {
             var scrapedContent = ScrapingBuilder.PerformScraping(collectorDescriptors);
             var serializedOutput = Serializer.SerializeScrapedOutput(formatting, scrapedContent);
-            TransientShell.CloseRunspace();
             return serializedOutput;
         }
 

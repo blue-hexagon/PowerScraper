@@ -1,9 +1,7 @@
-using PowerScraper.Core.Scraping;
 using PowerScraper.Core.Scraping.DataStructure;
 using PowerScraper.Core.Scraping.DataStructure.Collection;
 using PowerScraper.Core.Utility;
 using PowerScraper.Core.Utility.OS;
-using System.Threading;
 
 namespace PowerScraper.Core;
 

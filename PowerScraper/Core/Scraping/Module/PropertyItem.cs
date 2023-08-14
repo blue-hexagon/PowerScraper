@@ -1,4 +1,5 @@
 using PowerScraper.Core.Utility.OS;
+
 namespace PowerScraper.Core.Scraping.Module;
 
 public class PropertyItem
@@ -24,7 +25,11 @@ public class PropertyItem
     }
 }
 
-
-
-
-
+public class PropertyItemSequence
+{
+    private List<PropertyItem> _items;
+    public PropertyItemSequence(List<PropertyItem> items)
+    {
+        _items = items;
+    }
+}

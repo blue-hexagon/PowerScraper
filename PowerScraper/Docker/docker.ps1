@@ -2,9 +2,8 @@
 $currentDirectory = Get-Location
 Set-Location "C:\Users\Tobias\Desktop\PowerScraper\PowerScraper\PowerScraper\Docker"
 
-docker build -t icybadger/powerscraper-unittests:1.0.0 -f Docker/unittests.Dockerfile ../../
+docker build -t icybadger/powerscraper-unittests:1.0.0 -f unittests.Dockerfile ../../
 docker container run -it --rm --name ps-unittests icybadger/powerscraper-unittests:1.0.0
-
 if ($LASTEXITCODE -eq 0) {
     docker compose build
     # 'app' depends on 'postgres'

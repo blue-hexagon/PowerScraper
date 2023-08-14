@@ -10,6 +10,8 @@ PRICING.md
 *.suo
 *.user
 *.sln.docstates
+.idea/
+nuget.exe
 
 # Build results
 

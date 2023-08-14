@@ -7,7 +7,7 @@
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
 
-[![Workflow Status][workflow-shield]][workflow-url]
+
 
 </div>
 
@@ -21,10 +21,10 @@
 ![Linux][linux-badge]
 ![OSX][osx-badge]
 ![FreeBSD][freebsd-badge]
-<h2>Work in Progress</h2>
+<h2>Important: Work in Progress ~ Pre-Alpha</h2>
 <h3 align="center">PowerScraper</h3>
   <p align="center">
-    An advanced, lightweight system information tool 
+    An advanced, multi-platform, lightweight system query tool 
     <br />
     <a href="https://github.com/blue-hexagon/PowerScraper/releases"><strong>Get Latest Version »</strong></a>
     <br />

@@ -1,0 +1,72 @@
+---
+Tonsil {
+  GlobalPreAmble {
+    ExtractionImplementation {
+      command, platform, extractionTool
+    }
+    PropertyTree {
+      propertyGroup
+    }
+    PropertyGroup {
+      PropertGroup
+      PropertySequence
+      PropertyItem
+    } 
+    PropertyItem {
+      platform, propertyDisplayName, propertyQueryName, valueContainsBytes, cacheable, extractionTool, resourcePath 
+    }
+    Alias {
+      Item :: PropertyItem
+      ExImpl :: ExtractionImplementation
+    }
+  }
+}
+---
+PropertyDescriptor {
+  Name: "Harddrive Collector",
+  Description: "Collects information about disks and partitions as well as their usage",
+  CmdArgs: ["-c", ","--harddrive"]
+  Scraper: new HarddriveScraper()
+}
+---
+@@@
+All three are equivalent:
+1. PropertyTree {}
+2. PropertyTree > * {} 
+3. PropertyTree > Platform.Windows, Platform.Linux, Platform.OsX, Platform.FreeBsd {} 
+@@@
+PropertyTree > Platform.Windows, Platform.Linux, Platform.OsX, Platform.FreeBsd {
+    PropertyGroup "CPU" {
+        Script "Get-CimInstance Win32_Processor | Select-Object [*]", Platform.Windows, ExtractionTool.PowerShell
+        Script null, Platform.Linux, ExtractionTool.Bash
+        Script null, Platform.OsX, ExtractionTool.Bash
+        Script null, Platform.FreeBsd, ExtractionTool.Bash
+        
+        Item Platform.Windows, "DeviceID", "DeviceID", false, false, ExtractionTool.PowerShell, null
+        Item Platform.Linux, "DeviceID", "DeviceID", false, false, ExtractionTool.Subprocess, "/root/proc/fs/sys01"
+        Item Platform.Windows, "SocketDesignation", "SocketDesignation", false, false, ExtractionTool.PowerShell, null
+        Item Platform.Windows, "VMMonitorModeExtensions", "VMMonitorModeExtensions", false, false, ExtractionTool.PowerShell, null
+        
+        PropertyGroup "Clock" {
+            ExImpl "Get-CimInstance Win32_Processor", Platform.Windows, ExtractionTool.PowerShell
+            ExImpl null, Platform.Linux, ExtractionTool.Bash
+            ExImpl null, Platform.OsX, ExtractionTool.Bash
+            ExImpl null, Platform.FreeBsd, ExtractionTool.Bash
+    
+            Item Platform.Windows, "Clock Speed 1", "DeviceID", false, false, ExtractionTool.PowerShell, null
+            Item Platform.Linux, "DeviceID", "DeviceID", false, false, ExtractionTool.Subprocess, "/root/proc/fs/sys01"
+    
+            PropertyGroup "Specs" {
+                ExImpl "Get-CimInstance Win32_Processor", Platform.Windows, ExtractionTool.PowerShell
+                ExImpl null, Platform.Linux, ExtractionTool.Bash
+                ExImpl null, Platform.OsX, ExtractionTool.Bash
+                ExImpl null, Platform.FreeBsd, ExtractionTool.Bash
+    
+                Item Platform.Windows, "Clock Specs 1", "DeviceID", false, false, ExtractionTool.PowerShell, null
+                Item Platform.Linux, "DeviceID", "DeviceID", false, false, ExtractionTool.Subprocess, "/root/proc/fs/sys01"
+            }
+        }
+    }
+}
+
+    

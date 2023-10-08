@@ -1,0 +1,4 @@
+One script, has 0..N arguments/items and produces 0..N outputs
+One script has 
+
+Toby's Object Negated Scripting Interface Language

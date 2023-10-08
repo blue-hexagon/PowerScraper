@@ -29,4 +29,8 @@
         <PackageReference Include="YamlDotNet" Version="13.1.1" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Tonsil\Lexing\" />
+    </ItemGroup>
+
 </Project>

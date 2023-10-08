@@ -1,0 +1,80 @@
+---
+powerscraper:
+  - precondition_check: <{ precondition check here }>
+  - name: CPU
+  - cpu_scrapers:
+      - os: windows
+        precondition_check: |
+          {: precondition check here :}
+        script: |
+          {
+            tool = bash
+            arg_is_superuser = {: id -u :} # args are set by either ´arg = ...` (repeatedly, referenced as ´arg.<n>´) or ´arg_<key> = ...`, 
+            YAMLMap::"{:arg_superuser_status:}-IsSuperuser" <~ {: check to test if user is superuser :} # The return value is added as an item to the YAML tree.
+          },
+          {
+            path = absent
+            tool = powershell
+            args:
+              - "Win32_Processor":
+                  - ["DeviceID", _, no, no] # input_key, output_key, contains_bytes, cacheable
+                  - ["SocketDesignation", _, no, no]
+                  - ["LoadPercentage", _, no, no]
+                  - ["Architecture", _, no, no]
+                  - ["Description", _, no, no]
+                  - ["Manufacturer", _, no, no]
+              arg_ciminstance = "Win32_Processor"
+              field_splitting = r".*?:\s+.*" # Field delimiter should be programmable, i.e. have it's own "mini-DSL" for specifying how to filter values from var.keys
+              YAMLMap::Specs::YAMLMap <~ {: Get-CimInstance {arg_ciminstance} | Select-Object {1..-2 seperated as r"$, "} :} <~ [: item.first for item in args :]
+                                           YAMLMap::Specs::YAMLMap <~ {: Get-CimInstance {arg_ciminstance} | Select-Object {2..* seperated by ", "} :} <~ [: item.first for item in args :]
+                                           # |       ^....Scalar   |                             |                            ^... Argument Range             |               
+                                           # ^..YAML Object        ^...Script Block              ^...Positional Argument                                      ^List comprehension of args
+            },
+            
+            -- Test multiline strings below:
+            --- Test multiline strings below:
+            // Test multiline strings below:
+            # Test multiline strings below:
+            /* Multiline comment on a single line */
+            /** Multiline comment on a single line */
+            /** Multiline comment on a single line ***/
+            /** Multiline *comment *on a single line ***/
+            /*
+            * Multiline *comment *on a single line *
+            *
+            */
+            ---
+            YAMLMap::TestSomething <~ {: test something here and store the result as an Item in the YAMLTree called TestSomething :}
+            YAMLMap::ToolVersion <~ "A scalar field for storing some constant value - a versioning number perhaps?"
+        postcondition_check: |
+          {: ... :}
+      - os: linux
+        script: null
+        vars: null
+        tool: null
+      - os: osx
+        command: null
+        vars: null
+        tool: null
+      - os: freebsd
+        command: null
+        vars: null
+        tool: null
+items:
+  - windows:
+      - DeviceID:
+          query: DeviceID
+          name: DeviceID
+          contains_bytes: no
+          cacheable: no
+          resource-path: null
+    group: Clock
+    extraction_implementations:
+      windows:
+        command: '..'
+        vars: '..'
+      items:
+        - abc
+        - def
+        - ghi
+      group: Subgroup

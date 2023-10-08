@@ -1,8 +1,8 @@
 ﻿using PowerScraper.Core;
 using PowerScraper.Core.Utility;
-using System.Data.Sql;
-using PowerScraper.Core.Utility.OS;
 using PowerScraper.Tonsil;
+using PowerScraper.Tonsil.AST;
+using PowerScraper.Tonsil.AST.Expressions;
 
 namespace PowerScraper
 {
@@ -10,8 +10,17 @@ namespace PowerScraper
     {
         public static void Main(string[] args)
         {
-            // LexerTester.Test();
-            // ExitMessage.Write("Success");
+            // Expression expression = new BinaryExpression(
+                // new UnaryExpression(
+                    // new Token(TokenType.Minus, "-", null, '-'),
+                    // new LiteralExpression(123)),
+                // new Token(TokenType.Multiply, "*", null, '*'),
+                // new GroupingExpression(
+                    // new LiteralExpression(45.67)));
+            // Console.WriteLine(new AstPrinter().Print(expression));
+            // Environment.Exit(1);
+            var _ = new Interpreter(args);
+
             if (args.Length == 0)
             {
                 new Runner(

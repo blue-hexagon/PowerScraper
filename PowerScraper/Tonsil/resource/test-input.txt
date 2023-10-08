@@ -1,0 +1,52 @@
+{
+  tool = bash
+  arg_is_superuser = {: id -u :} # args are set by either ´arg = ...` (repeatedly, referenced as ´arg.<n>´) or ´arg_<key> = ...`, 
+  YAMLScalar::"{:arg_superuser_status:}-IsSuperuser" <~ {: check to test if user is superuser :} # The return value is added as an item to the YAML tree.
+},
+{
+  path = absent
+  tool = powershell
+  args = [
+    {
+      "Win32_Processor" [
+        ["DeviceID", _, no, no], # input_key, output_key, contains_bytes, cacheable
+        ["SocketDesignation", _, no, no],
+        ["LoadPercentage", _, no, no],
+        ["Architecture", _, no, no],
+        ["Description", _, no, no],
+        ["Manufacturer", _, no, no]
+      ]
+    },
+    {
+      "Win32_Threading" [
+        ["ThradCount", _, no, no], # input_key, output_key, contains_bytes, cacheable
+        ["ActiveThreads", _, no, no],
+      ]
+    },
+  ]
+  
+  arg_ciminstance = args[0]
+  field_splitting = r".*?:\s+.*"
+  #                                                                 Select-Object {1..-2 seperated as r"$, "} 
+  YAMLMap::Specs::YAMLMap <~ {: Get-CimInstance {arg_ciminstance} | Select-Object {2..*  seperated by ", "  } :} <~ [: item.first for item in args :]
+  # |       ^....Scalar   |                             |                            ^... Argument Range                |               
+  # ^..YAML Object        ^...Script Block              ^...Positional Argument                                         ^List comprehension of args
+},
+{
+  YAMLMap::TestSomething <~ {: test something here and store the result as an Item in the YAMLTree called TestSomething :}
+  YAMLMap::ToolVersion <~ "A scalar field for storing some constant value - a versioning number perhaps?"
+},
+{
+  -- Test multiline strings below:
+  --- Test multiline strings below:
+  // Test multiline strings below:
+  # Test multiline strings below:
+  /* Multiline comment on a single line */
+  /** Multiline comment on a single line */
+  /** Multiline comment on a single line ***/
+  /** Multiline *comment *on a single line ***/
+  /*
+  * Multiline *comment *on a single line *
+  *
+  */
+}
